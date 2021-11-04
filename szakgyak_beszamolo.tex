@@ -1,0 +1,219 @@
+\documentclass[a4paper,12pt,titlepage]{article}
+
+\usepackage{ucs}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[magyar]{babel}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[hang]{caption}
+\usepackage{subcaption}
+\usepackage{epsfig}
+\usepackage{enumerate}
+\usepackage{psfrag}
+\usepackage[left=20mm,right=20mm,top=20mm,bottom=25mm]{geometry}
+% \usepackage[left=10mm,right=10mm,top=10mm,bottom=15mm]{geometry} %landscape
+\usepackage[hyphenbreaks]{breakurl}
+\usepackage[hyphens]{url}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{csquotes}
+\usepackage{siunitx}
+\hypersetup{
+	colorlinks,
+	linkcolor={red!50!black},
+	citecolor={blue!50!black},
+	urlcolor={blue!80!black}
+}
+
+% \newcommand{\zi}{z^{-1}}
+% \newcommand{\zii}{z^{-2}}
+% \newcommand{\ejth}{e^{-j\vartheta}}
+% \newcommand{\ejtth}{e^{-j2\vartheta}}
+% \newcommand{\Ohm}{\Omega}
+% \newcommand{\jw}{j\omega}
+% \newcommand{\jwn}{(\jw)^2}
+\newcommand{\cpv}[1]{\overline{#1}}
+\newcommand{\Ukcs}{\cpv{U}}
+\newcommand{\Icpv}{\cpv{I}}
+\newcommand{\Ucpv}{\cpv{U}}
+\usetikzlibrary{arrows.meta}
+
+\pagestyle{plain} 
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\scriptsize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+\title{
+\includegraphics[width=0.6\textwidth]{bme.pdf} \\
+\centering
+\large{\textbf{Budapesti Műszaki és Gazdaságtudományi Egyetem}\\
+\textbf{Villamosmérnöki és Informatikai Kar}\\
+\textbf{Szélessávú Hírközlés és Villamosságtan Tanszék}}\\
+\vspace{6cm}
+\huge{\textbf{Szakmai Gyakorlat Beszámoló}} \\
+\vspace{2cm}}
+\author{Szilágyi Gábor \\\vspace{2cm}\\ Konzulens: Bódi Tamás}
+\date{Budapest, 2021.}
+  
+
+\begin{document}
+
+
+  	\maketitle
+  	
+
+	\tableofcontents
+
+
+	\newpage
+  
+
+\section{Bevezetés}
+
+	A szakmai gyakorlatomat 2021 nyarának végén, a Silicon Laboratories Hungary Kft. budapesti irodájában végeztem, a Hardware Tools csapat gyakornokaként. Itt rádió áramkörök tervezésével, dokumentálásával és mérésével ismerkedtem meg.
+
+\subsection{A cégről}
+
+	A Silicon Laboratories cég fő profilja alacsony fogyasztású és rövid hatótávú (~ 10 m ... 500 m), mikrokontroller alapú rádiók tervezése, eladása, valamint hardveres és szoftveres támogatás nyújtása ezekhez. A cég ügyfelei nem végfelhasználók, hanem más cégek, akik különböző fogyasztói vagy ipari termékekben használják fel a Silicon Laboratories rádiós megoldásait. Ilyen végtermékek lehetnek például okos villanykörték, okos zárak, akkumulátoros Bluetooth szenzorok vagy kapunyitó távirányítók. Ezeknek a vezetéknélküli eszközöknek a lelke a rádiós chipek, amik közül egy népszerű sorozat az EFR32.
+
+\subsection{EFR32}
+
+	Az EFR32 chipek 32-bites ARM Cortex processzort tartalmaznak és számos változatuk létezik. Bizonyos változatokban nem található rádiós interfész, ezek kifejezetten mikrokontrollernek készültek. Mások pedig "wireless SoC"-k (vezetéknélküli, teljesen integrált eszközök), amelyek tartalmaznak mikrokontrollert és rádiós interfészt is. A későbbiekben az utóbbi variánsokra fogok fókuszálni, mert ezekkel kerültem szorosabb kapcsolatba a szakmai gyakorlat során.
+
+	Az EFR32 Wireless SoC-knak számos alváltozata van, de közülük a következő 3-at említem meg (ezek az EFR32 Wireless SoC series 1 tagjai):
+
+	1. Blue Gecko (EFR32BG) - Ez a család a Bluetooth protokoll-ra fókuszál, így 2.4 GHz-en működő vezetéknélküli interfésze van. Bluetooth Low Energy-t és Bluetooth Mesh-t támogató változatai is vannak.
+
+	2. Flex Gecko (EFR32FG) - Ez a család a Proprietary (és Wi-SUN) rádiós protokollokra fókuszál, így változatos frekvenciákon működő rádió SoC-k tartoznak ide, mind 2.4 GHz-en és Sub-GHz-es ISM (Industrial Scientific Medical) sávokon.
+
+	3. Mighty Gecko (EFR32MG) - Ennek az SoC családnak a megkülönböztető jegye, hogy ugyanaz a modul több protokollt is támogat egyszerre, ilyenek lehetnek a Bluetooth, Zigbee, Thread, Proprietary és a Wi-Fi. Vannak közöttük egy- és több sávon működő változatai is.
+
+[ábra az efr32mg architektúrájáról és szöveg erre hivatkozva]
+
+
+\section{Rádiós alapismeretek}
+
+A gyakornokságom első időszakát főleg a későbbi munkámhoz kapcsolódó rádiós ismeretek átismétlésével és kiegészítésével töltöttem. Ebben a fejezetben a közben előforduló fontosabb fogalmakat foglalom össze.
+
+\subsection{Elosztott paraméterű rendszerek}
+
+Az áramkörökben előforduló frekvenciák növelésével előbb-utóbb elérjük azt a határt, ami fölött már a kérdéses frekvencián az elektromágneses hullámok hullámhossza összemérhető lesz az áramkör fizikai méretével. Ilynekor a koncentrált paraméterű áramköri modell már nem nem ad jó eredményeket, ezért elosztott paraméterű elemeket kell használnunk a modellben. Ilyen a tápvonal.
+
+A tápvonal érdekessége, hogy ha csak egy adott frekvencián vizsgálunk egy olyan áramkört, ami tápvonalt is tartalmaz, akkor ez az áramkör mindig helyettesíthető egy olyannal, amiben a tápvonalat valamilyen koncentrált paraméterűre cseréljük. Igen ám, de ha ezt a helyettesítést tartalmazó áramkört ettől különböző frekvenciákon hasonlítjuk össze az eredetivel, akkor már eltérések lesznek (lehetnek). Ezek szerint a tápvonalak viselkedésének sajátos frekvenciafüggése van.
+
+[ábra a tápvonalról és egy helyettesítőképéről]
+
+A fenti képen látható, hogy a tápvonal áram és feszültségértékeinek viselkedését differenciálegyenletekkel írhatjuk le. Ezeknek a differenciálegyenleteknek a megoldása két komponensből áll általános esetben, egy "előre" és egy "visszafelé" haladó feszültség-áram hullámból.
+
+[diffegyenletek]
+
+A tápvonalak egyik alapvető tulajdonsága a hullámimpedanciájuk ($Z_0$). Ez
+
+\subsection{Reflexiós tényező}
+
+A valódi tápvonalak vannak végeik, ezért érdemes a lezárásaiknál fellépő jelenségekkel foglalkozni. Ha a tápvonal egik végét lezárjuk egy $Z_l$ impedanciával, akkor a $Z_l$ lezáró impedancia függvényében változik, hogy mi történik egy feszültség- vag áramhullámmal, ami a tápvonalban haladva eléri annak a lezárt végét. Passzív lezárás esetén a visszavert áram- vagy feszültséghullám amplitúdója nem lehet nagyobb, mint a beesőé. A lezáró impedanciától függően a visszaverődő és beeső hullámok amplitúdóinak hányadosa a reflexiós tényező. Mivel áram- és feszültséghullámokkal eltérően viselkedik a reflexió (előjelbeli különbség), ezért el kell különíteni az áramra és a feszültségre vonatkozó reflexiós tényezőket. Általában csak a feszültségre vonatkozó reflexiós tényezővel szokás foglalkozni, mert ha a kettő közül ismerjük az egyiket, akkor könnyen ki lehet számolni a másikat és a villamosmérnökök jobban szeretnek feszültségjelekben gondolkozni.
+
+A visszavert feszültséghullámnak az amplitúdója mellett a fázisa is érdekes, ezért a reflexiós tényezőt komplex számként írjuk le, ami amplitúdó és fázisinformációt is hordoz.
+
+[különböző esetek]
+
+\subsection{Szórási paraméterek}
+
+A reflexiós tényező általánosítása a szórási mátrix.
+
+2.4 - Smith-diagram
+
+A reflexiós tényezők, impedanciák és az impedanciatranszformációk hatását nagyon frappáns módon lehet ábrázolni Smith-diagramon. Ez egy általánosan használt és egyszerű vizualizációs eszköz, ami már a '40-es évek óta segíti a villamosmérnökök munkáját. A Smith-diagram valójában egy speciális koordinátarendszer, amiben egyrészt megadhatunk egy impedanciát és leolvashatjuk a hozzá tartozó reflexiós tényezőt, ha ilyen impedanciával zárunk le egy tápvonalat és ugyanez működik fordítva is. Másrészt könnyen ábrázolhatóak benne a gyakran előforduló, tápvonalak közbe iktatott négypólusok impedanciatranszformáló hatásai.
+
+[képek az impedanciatranszformálásról]
+
+
+\subsection{Impedanciaillesztés}
+
+A valódi RF (rádiófrekvenciás) alkalmazásokban gyakran a reflexiós tényező minimalizálására törekszünk, amikor össze akarunk kapcsolni két áramköri részt, amik között RF jelátvitel van. Ha egy megfelelő illesztőhálózaton keresztül kapcsoljuk össze a két eltérő bemeneti impedanciával rendelkező áramköri részt, akkor elérhetjük, hogy az egyikből a másikba haladó jel csak elhanyagolható reflexiót szenvedjen el.
+
+A fentebb emlegetett EFR32-es IC-k RF kimenetéhez már a tokozáson kívül kell megfelelő szűrőt és illesztőhálózatot kapcsolni, amiken keresztül az antennához kapcsolódik. Ennek adási és vételi szempontból is nagy jelentőssége van.
+
+Adás esetén azt biztosítja az illesztőhálózat, hogy a végfokerősítőről érkező teljesítmény minél nagyobb része érkezzen az antennára és sugározzon el. Bizonyos EFR32-alapú rádióknál a kimenő teljesítmény akár 20 dBm (vagyis 0.1 W) is lehet, ami elég nagynak számít. Ez nem megfelelő tervezésnél jobb esetben fölöslegesen növeli a rádió által fogyasztott teljesítményt egy adott kisugárzott teljesítmény mellett, rosszabb esetben pedig kárt is tehet az áramkörben, főleg a végső erősítőfokozatban.
+
+Vétel esetén az illesztőhálózat feladata, hogy az antennáról érkező jelet minél kisebb csillapítással és reflexióval eljuttassa a vevőhöz. Ha nem megfelelő az illesztőhálózat, akkor vételnél jelentősen megnövelheti azt a minimális vett teljesítményszintet, aminél a vevő még érzékelni és dekódolni tudja a vett jelet.
+
+\section{Szoftverek}
+
+A szakmai gyakorlat alatt különböző programokkal ismerkedtem meg, amiket a cégnél a rádió áramkörök és nyomtatott hordozó lapok tervezésénél és tesztelésénél használnak. Ebben a fejezetben azkról a fontosabb szoftverekről írok, amiket én is használtam.
+
+\subsection{Smith}
+
+A Smith egy lényegretörő program, amivel Smith-diagramon lehet ábrázolni a reflexiós tényezőt és a passzív komponensekkel transzformált impedanciát. Főleg a szűrő- és illesztőhálózatok tervezésénél használatos.
+
+[valami képek, esetleg szöveg, példa]
+
+\subsection{AWR Microwave Office}
+
+A Microwave Office egy összetett tervező- és szimulációs program, amit főleg ideális és valós alkatrészekből álló áramkörök szimulációjára és optimalizációjára használtam. Ennél sokkal többre is képes, például fizikai elrendezések elektromágneses szimulációjára, vagy pontatlan alkatrészparaméterekkel szembeni robusztusság vizsgálatára is.
+
+[BŐVEBBEN!]
+[PÉLDA!]
+
+\subsection{Simplicity Studio}
+
+A Simplicity Studio egy Silabs termék, ami fontos része a Silabs-os modulok, mikrokontrollerek és rádió chipek szoftveres támogatásának. Ezzel a programmal a Silabs hardvereket beállítani, programozni és vezérelni lehet.
+
+A hardver az én esetemben egy WSTK (Wireless Starter Kit) alaplap és az ehhez kapcsolódó változatos wireless SoC-k voltak.
+
+[WSTK és radio board kép]
+
+A megfelelően konfigurált Simplicity Studio felismeri a csatlakoztatott WSTK-t és a hozzá kapcsolódó wireless SoC-t vagy MCU-t (MicroController Unit). Ezután előre definiált programokból lehet választani, amik tovább konfigurálhatóak, vagy teljesen egyedi programot is lehet benne írni a csatlakoztatott eszközre. A programot le lehet fordtani és a keletkező binárist fel lehet tölteni a hardverre a Simplicity Studio-n belülről.
+
+
+4. -
+
+
+	\newpage	
+	
+	\begin{thebibliography}{12}
+		\bibitem{hockney} R. W. Hockney, J. W. Eastwood, Computer Simulation Using Particles 1988, ISBN 0-85274-392-0
+		\bibitem{nano_tech} Az NVIDIA Jetson Nano fejlesztőkártya \\ \url{https://developer.nvidia.com/embedded/jetson-nano-developer-kit}
+		\bibitem{jetpack} Az NVIDIA Jetpack SDK szoftvercsomagja \\ \url{https://developer.nvidia.com/embedded/jetpack}
+		\bibitem{cuda_10.2} A CUDA 10.2-es verziójának dokumentációja, ezt a verziót használtam \\ \url{https://docs.nvidia.com/cuda/archive/10.2/cuda-toolkit-release-notes/index.html}
+		\bibitem{cuda_11.3} A CUDA aktuális verziójának dokumentációja, bővebb leírással \\ \url{https://docs.nvidia.com/cuda/index.html}
+		\bibitem{aeitc} An Easy Introduction to CUDA C and C++ \\ \url{https://developer.nvidia.com/blog/easy-introduction-cuda-c-and-c/}
+		\bibitem{aeeitc} An Even Easier Introduction to CUDA \\ \url{https://developer.nvidia.com/blog/even-easier-introduction-cuda/}
+		\bibitem{performance_metrics} How to implement performance metrics in CUDA C/C++ \\ \url{https://developer.nvidia.com/blog/how-implement-performance-metrics-cuda-cc/}
+		\bibitem{kimaradt} A CUDA-ban definiált Unified Memory hatékony használata Tegra rendszeren \\ \url{https://docs.nvidia.com/cuda/cuda-for-tegra-appnote/index.html#effective-usage-unified-memory}
+		\bibitem{setup} Az operációs rendszer telepítése headless módban. \\ \url{https://developer.nvidia.com/embedded/learn/get-started-jetson-nano-devkit#setup}
+		\bibitem{donko} Dr. Donkó Zoltán -- Alacsony Hőmérsékletű Plazmafizika \\ \url{http://plasma.szfki.kfki.hu/~zoli/plazmafizika_2020/Donko_alacsony_homersekletu_plazmafizika_2020.pdf}
+	\bibitem{donko_uj} Lazábban kapcsolódó cikk, szintén egydimenziós plazmaszimuláció témában \\ \url{http://plasma.szfki.kfki.hu/~zoli/pdfs/CPP_2021_Juhasz_GPU_PIC.pdf}
+	\end{thebibliography}
+
+				
+\end{document}
