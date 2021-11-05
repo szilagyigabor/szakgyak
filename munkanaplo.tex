@@ -1,4 +1,4 @@
-\documentclass[10pt,a4paper,oneside]{report}
+\documentclass[9pt,a4paper,oneside]{report}
 % nagyon sok kép esetén meggyorsítható a fordítás a draft móddal
 % \documentclass[12pt,a4paper,oneside,draft]{report}
 % ekkor a képek nem renderelődnek ki, csak placeholder lesz mérethelyesen
@@ -136,7 +136,7 @@
 \definecolor{indigo(dye)}{rgb}{0.0, 0.25, 0.42}
 
 % az A4 oldal margóinak és méreteinek beállítása
-\usepackage[left=15mm,right=15mm,top=15mm,bottom=15mm]{geometry}\pagestyle{plain}
+\usepackage[left=15mm,right=15mm,top=10mm,bottom=5mm]{geometry}\pagestyle{plain}
 
 % A sorköz távolság beállítása
 % egyszeres sorköz
@@ -164,54 +164,71 @@
 \begin{center}
 	\Large{Szakmai Gyakorlat Munkanapló}
 \end{center}
-\vspace{0.5 cm}
 \begin{tabular}{p{2.5 cm} p{2.5 cm} p{5 cm} p{6 cm}}
-	\textbf{Név:} & Szilágyi Gábor & \textbf{Gyakorlat Időtartama:} & 6 hét\\
+	\textbf{Név:} & Szilágyi Gábor & \textbf{Gyakorlat Időtartama:} & 10 hét\\
 	\textbf{NEPTUN:} & NOMK01 & \textbf{Intézmény:} & Silicon Laboratories Hungary Kft.\\
 	\textbf{Képzés:} & BSc & \textbf{Intézmény székhelye:} & 1033 Budapest, Ángel Sanz Briz út 13. \\
 	& & \textbf{Gyakorlóhelyi Konzulens:} & Bódi Tamás
-\end{tabular} \\ \\\\
-Megjegyzés: Az egyes sorok 4 órát jelentenek \\
-
-\begin{table}[h]
+\end{tabular}
+\begin{table}[h!]
 	\centering
 	\begin{tabular}{| c | p{3 cm} | p{10 cm} |}
 	\hline
-	 & Dátum & Tevékenység \\ \hline \hline
+	 & Dátum & Tevékenység (Megjegyzés: Az egyes sorok 4 órát jelentenek) \\ \hline \hline
 	\rownum & 2021.07.01. & IT oktatás, céges laptop beüzemelése \\ \hline
 	\rownum & 2021.07.02. & Céges szoftverek telepítése \\ \hline
 	\rownum & 2021.07.05. & Silabs EFR32 IC adatlap tanulmányozás \\ \hline
 	\rownum & 2021.07.06. & Silabs EFR32 IC adatlap tanulmányozás \\ \hline
 	\rownum & 2021.07.07. & New hire orientation call \\ \hline
-	\rownum & 2021.07.09. & New hire orientation call \\ \hline
-	\rownum & 2021.07.07. & New hire orientation call \\ \hline
-	\rownum & 2021.07.22. & RAILtest \\ \hline
-	\rownum & 2021.07.06. & New hire orientation call \\ \hline
-	\rownum & 2021.07.06. & New hire orientation call \\ \hline
-	\rownum & 2021.07.06. & New hire orientation call \\ \hline
-	\rownum & 2021.07.06. & New hire orientation call \\ \hline
-	\rownum & 2021.07.06. & New hire orientation call \\ \hline
-	\rownum & 2021.07.06. & New hire orientation call \\ \hline
-	\rownum & 2021.07.06. & New hire orientation call \\ \hline
-	\rownum & 2021.07.06. & New hire orientation call \\ \hline
-	\rownum & 2021.07.06. & New hire orientation call \\ \hline
-	\rownum & 2021.07.06. & New hire orientation call \\ \hline
-	\rownum & 2021.07.06. & New hire orientation call \\ \hline
-	\rownum & 2021.07.06. & New hire orientation call \\ \hline
-	\rownum & 2021.07.06. & New hire orientation call \\ \hline
-	\rownum & 2021.07.06. & New hire orientation call \\ \hline
-	\rownum & 2021.07.06. & New hire orientation call \\ \hline
-	\rownum & 2021.07.06. & New hire orientation call \\ \hline
-	\rownum & 2021.07.06. & New hire orientation call \\ \hline
-	\rownum & 2021.07.06. & New hire orientation call \\ \hline
-	\rownum & 2021.07.06. & New hire orientation call \\ \hline
-	\rownum & 2021.07.06. & New hire orientation call \\ \hline
-	\rownum & 2021.07.06. & New hire orientation call \\ \hline
-	\rownum & 2021.07.06. & New hire orientation call \\ \hline
-	\rownum & 2021.07.06. & New hire orientation call \\ \hline
-	\rownum & a & a \\ \hline \hline
-	$\sum$ & ? [óra]& \\ \hline
+	\rownum & 2021.07.09. & Zólomi Attila - Optikai Távközlés olvasása \\ \hline
+	\rownum & 2021.07.09. & Zólomi Attila - Optikai Távközlés olvasása \\ \hline
+	\rownum & 2021.07.13. & David M. Pozar - Microwave Engineering (Microwave Filters) \\ \hline
+	\rownum & 2021.07.13. & Pozar - (Microwave Network Analysis) \\ \hline
+	\rownum & 2021.07.14. & RAILtest demo program kipróbálása \\ \hline
+	\rownum & 2021.07.15. & Pozar - (Impedance Matching and Tuning) \\ \hline
+	\rownum & 2021.07.15. & Pozar - (Impedance Matching and Tunimg) \\ \hline
+	\rownum & 2021.07.19. & AN930.1 - 2.4 GHz matching guide olvasása \\ \hline
+	\rownum & 2021.07.21. & AN923.1 - Sub-GHz matching guide olvasása \\ \hline
+	\rownum & 2021.07.22. & AWR Microwave Office gyakorlás \\ \hline
+	\rownum & 2021.07.22. & Pozar - (Microwave Filters) \\ \hline
+	\rownum & 2021.07.23. & Pozar példaszűrő Microwave Office-ban \\ \hline
+	\rownum & 2021.07.24. & Pozar - (Microwave Network Analysis) \\ \hline
+	\rownum & 2021.07.25. & Pozar - (Transmission Lines and Waveguides) \\ \hline
+	\rownum & 2021.07.25. & Pozar - (Transmission Lines and Waveguides) \\ \hline
+	\rownum & 2021.08.06. & Vida Zoltán - Microwave Office gyorstalpaló\\ \hline
+	\rownum & 2021.08.09. & Pozar példaszűrő MWO-ban, valós komponensekkel \\ \hline
+	\rownum & 2021.08.10. & Pozar példaszűrő Microwave office-ban, yield-analízis \\ \hline
+	\rownum & 2021.08.11. & Yield analízis debugolás \\ \hline
+	\rownum & 2021.08.12. & Zólomi Attila - Optikai Távközlés olvasása \\ \hline
+	\rownum & 2021.08.13. & Zólomi Attila - Optikai Távközlés olvasása \\ \hline
+	\rownum & 2021.08.16. & Netlist importálás MWO-ba, yield analízis \\ \hline
+	\rownum & 2021.08.17. & Kötelező tréningek elvégzése \\ \hline
+	\rownum & 2021.08.17. & Kötelező tréningek elvégzése \\ \hline
+	\rownum & 2021.08.18. & Kötelező tréningek elvégzése \\ \hline
+	\rownum & 2021.08.19. & Irodalomkutatás: szűrő típusok, SAW-filter \\ \hline
+	\rownum & 2021.08.24. & Hardware-es meeting \\ \hline
+	\rownum & 2021.08.26. & Zólomi matching példák szimulációja MWO-ban és Smith-ben \\ \hline
+	\rownum & 2021.08.26. & Zólomi matching példák szimulációja MWO-ban és Smith-ben \\ \hline
+	\rownum & 2021.08.27. & Range test példaprogram kipróbálása \\ \hline
+	\rownum & 2021.08.27. & Range számolás \\ \hline
+	\rownum & 2021.08.30. & Range számolás \\ \hline
+	\rownum & 2021.08.31. & Altium és Pads bevezető tréning \\ \hline
+	\rownum & 2021.09.06. & Ismerkedés a Jenkins build rendszerrel \\ \hline
+	\rownum & 2021.09.06. & Ismerkedés a Jenkins Build rendszerrel \\ \hline
+	\rownum & 2021.09.07. & Layout tréning \\ \hline
+	\rownum & 2021.09.08. & Céges kültéri esemény \\ \hline
+	\rownum & 2021.09.08. & Céges kültéri esemény \\ \hline
+	\rownum & 2021.09.10. & Git/Sourcetree beüzemelés \\ \hline
+	\rownum & 2021.09.13. & Git/Sourcetree gyakorlás \\ \hline
+	\rownum & 2021.09.13. & PADS tréning \\ \hline
+	\rownum & 2021.09.16. & General Component updates - régebbi board design frissítés \\ \hline
+	\rownum & 2021.09.16. & General component updates \\ \hline
+	\rownum & 2021.09.17. & General component updates \\ \hline
+	\rownum & 2021.09.17. & General component updates \\ \hline
+	$\sum$ & 200 óra& \\ \hline
 	\end{tabular}
 \end{table}
+\vspace{.5 cm} \\
+Gyakorlóhelyi konzulens:
 
 \end{document}
