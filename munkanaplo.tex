@@ -13,7 +13,7 @@
 %\usepackage{listings}
 %\usepackage{sectsty}
 %\usepackage{enumerate}
-\usepackage{siunitx} % ezzel lehet hivatalosan megformázni: szám + mértékegység
+%\usepackage{siunitx} % ezzel lehet hivatalosan megformázni: szám + mértékegység
 %\usepackage{lastpage}
 \usepackage{setspace}
 \usepackage{hyperref} % PDF hivatkozásokhoz kell
@@ -24,110 +24,6 @@
 \usepackage{blindtext}
 \usepackage{wrapfig}
 
-
-% A legendás siunitx package, ami a mértékegységek leírásának
-% leghivatalosabb módja, ezeket a makrókat definiálja:
-
-% használat: \SI[per-mode=symbol]{12345,678}{\kilo\amper\per\kandela\tothe{9}}
-% ilyesmi lesz, csak jobb: 12345.67\, kAcd^{-9}
-
-% egyszerűbb eset: \SI{50}{\ohm}
-
-
-%% SI alapegységek:
-% amper         -   \ampere
-% kandela       -   \candela
-% kelvin        -   \kelvin
-% kilogramm     -   \kilogram
-% méter         -   \metre  (!!)
-% mól           -   \mole
-% másodperc     -   \second
-
-%% Származtatott SI egységek:
-% becquerel     -   \becquerel
-% celziusz fok  -   \degreeCelsius
-% coulomb       -   \coulomb
-% farád         -   \farad
-% gray          -   \gray
-% hertz         -   \hertz
-% henry         -   \henry
-% joule         -   \joule
-% katal         -   \katal
-% lumen         -   \lumen
-% lux           -   \lux
-% newton        -   \newton
-% ohm           -   \ohm
-% pascal        -   \pascal
-% radián        -   \radian
-% siemens       -   \siemens
-% sievert       -   \sievert
-% szteradián    -   \steradian
-% tesla         -   \tesla
-% volt          -   \volt
-% watt          -   \watt
-% weber         -   \weber
-
-%% Elfogadott, nem SI mértékegységek
-% nap           -   \day
-% fok           -   \degree
-% hektár        -   \hectare
-% óra           -   \hour
-% liter         -   \litre ( vagy \liter, de az előző kis "l" lesz, az utóbbi nagy "L")
-% fokperc       -   \arcminute
-% perc          -   \minute
-% fokmásodperc  -   \arcsecond
-% tonna         -   \tonne
-
-%% Kísérleti úton megállapítható nem SI egységek:
-% csillagászati egység      -   \astronomicalunit
-% atomi tömegegység         -   \atomicmassunit
-% bohr                      -   \bohr
-% fénysebesség              -   \clight
-% dalton                    -   \dalton
-% elektrontömeg             -   \electronmass
-% elektronvolt              -   \electronvolt
-% egységtöltés              -   \elementarycharge
-% hartree                   -   \hartree
-% redukált planck állandó   -   \planckbar
-
-%% Más nem SI egységek:
-% ångström          -   \angstrom
-% bár               -   \bar
-% barn              -   \barn
-% bel               -   \bel
-% decibel           -   \decibel
-% csomó             -   \knot
-% higanymilliméter  -   \mmHg
-% tengeri csomó     -   \nauticalmile
-% neper             -   \neper
-
-%% Prefixek:
-% yocto-        -   \yocto  (-24)
-% zepto-        -   \zepto  (-21)
-% atto-         -   \atto   (-18)
-% femto-        -   \femto  (-15)
-% piko-         -   \pico   (-12)
-% nano-         -   \nano   (-9)
-% mikro-        -   \yocto  (-6)
-% milli         -   \milli  (-3)
-% centi-        -   \centi  (-2)
-% deci-         -   \deci   (-1)
-
-% deka-         -   \deca   (1)
-% hekto-        -   \hecto  (2)
-% kilo-         -   \kilo   (3)
-% mega-         -   \mega   (6)
-% giga-         -   \giga   (9)
-% tera-         -   \tera   (12)
-% peta-         -   \peta   (15)
-% exa-          -   \exa    (18)
-% zetta-        -   \zetta  (21)
-% yotta-        -   \yotta  (24)
-
-
-% a TikZ rajzoló modul, és a kapcsolási rajz készítő modul, ha kell
-%\usepackage{tikz}
-%\usepackage{circuitikz}
 
 \pagenumbering{gobble}
 
@@ -165,9 +61,9 @@
 	\Large{Szakmai Gyakorlat Munkanapló}
 \end{center}
 \begin{tabular}{p{2.5 cm} p{2.5 cm} p{5 cm} p{6 cm}}
-	\textbf{Név:} & Szilágyi Gábor & \textbf{Gyakorlat Időtartama:} & 11 hét\\
+	\textbf{Név:} & Szilágyi Gábor & \textbf{Gyakorlat Időtartama:} & X hét\\
 	\textbf{NEPTUN:} & NOMK01 & \textbf{Intézmény:} & Silicon Laboratories Hungary Kft.\\
-	\textbf{Képzés:} & BSc & \textbf{Intézmény székhelye:} & 1033 Budapest, Ángel Sanz Briz út 13. \\
+	\textbf{Képzés:} & MSc & \textbf{Intézmény székhelye:} & 1033 Budapest, Ángel Sanz Briz út 13. \\
 	& & \textbf{Gyakorlóhelyi Konzulens:} & Bódi Tamás
 \end{tabular}
 \begin{table}[h!]
@@ -176,62 +72,8 @@
 	\begin{tabular}{| c | p{3 cm} | p{10 cm} |}
 	\hline
 	 & Dátum & Tevékenység (Megjegyzés: Az egyes sorok 4 órát jelentenek) \\ \hline \hline
-	\rownum & 2021.07.01. & IT oktatás, céges laptop beüzemelése \\ \hline
-	\rownum & 2021.07.02. & Céges szoftverek telepítése \\ \hline
-	\rownum & 2021.07.05. & Silabs EFR32 IC adatlap tanulmányozás \\ \hline
-	\rownum & 2021.07.06. & Silabs EFR32 IC adatlap tanulmányozás \\ \hline
-	\rownum & 2021.07.07. & New hire orientation call \\ \hline
-	\rownum & 2021.07.09. & Zólomy Attila - Optikai Távközlés olvasása \\ \hline
-	\rownum & 2021.07.09. & Zólomy Attila - Optikai Távközlés olvasása \\ \hline
-	\rownum & 2021.07.13. & David M. Pozar - Microwave Engineering (Microwave Filters) \\ \hline
-	\rownum & 2021.07.13. & Pozar - (Microwave Network Analysis) \\ \hline
-	\rownum & 2021.07.14. & RAILtest demo program kipróbálása \\ \hline
-	\rownum & 2021.07.15. & Pozar - (Impedance Matching and Tuning) \\ \hline
-	\rownum & 2021.07.15. & Pozar - (Impedance Matching and Tuning) \\ \hline
-	\rownum & 2021.07.19. & AN930.1 - 2.4 GHz matching guide olvasása \\ \hline
-	\rownum & 2021.07.21. & AN923.1 - Sub-GHz matching guide olvasása \\ \hline
-	\rownum & 2021.07.22. & AWR Microwave Office gyakorlás \\ \hline
-	\rownum & 2021.07.22. & Pozar - (Microwave Filters) \\ \hline
-	\rownum & 2021.07.23. & Pozar példaszűrő Microwave Office-ban \\ \hline
-	\rownum & 2021.07.24. & Pozar - (Microwave Network Analysis) \\ \hline
-	\rownum & 2021.07.25. & Pozar - (Transmission Lines and Waveguides) \\ \hline
-	\rownum & 2021.07.25. & Pozar - (Transmission Lines and Waveguides) \\ \hline
-	\rownum & 2021.08.06. & Vida Zoltán - Microwave Office gyorstalpaló\\ \hline
-	\rownum & 2021.08.09. & Pozar példaszűrő MWO-ban, valós komponensekkel \\ \hline
-	\rownum & 2021.08.10. & Pozar példaszűrő Microwave office-ban, yield-analízis \\ \hline
-	\rownum & 2021.08.11. & Yield analízis debugolás \\ \hline
-	\rownum & 2021.08.12. & Zólomy Attila - Optikai Távközlés olvasása \\ \hline
-	\rownum & 2021.08.13. & Zólomy Attila - Optikai Távközlés olvasása \\ \hline
-	\rownum & 2021.08.16. & Netlist importálás MWO-ba, yield analízis \\ \hline
-	\rownum & 2021.08.17. & Kötelező tréningek elvégzése \\ \hline
-	\rownum & 2021.08.17. & Kötelező tréningek elvégzése \\ \hline
-	\rownum & 2021.08.18. & Kötelező tréningek elvégzése \\ \hline
-	\rownum & 2021.08.19. & Irodalomkutatás: szűrő típusok, SAW-filter \\ \hline
-	\rownum & 2021.08.24. & Hardware-es meeting \\ \hline
-	\rownum & 2021.08.26. & Zólomy matching példák szimulációja MWO-ban és Smith-ben \\ \hline
-	\rownum & 2021.08.26. & Zólomy matching példák szimulációja MWO-ban és Smith-ben \\ \hline
-	\rownum & 2021.08.27. & Range test példaprogram kipróbálása \\ \hline
-	\rownum & 2021.08.27. & Range számolás \\ \hline
-	\rownum & 2021.08.30. & Range számolás \\ \hline
-	\rownum & 2021.08.31. & Altium és Pads bevezető tréning \\ \hline
-	\rownum & 2021.09.06. & Ismerkedés a Jenkins build rendszerrel \\ \hline
-	\rownum & 2021.09.06. & Ismerkedés a Jenkins Build rendszerrel \\ \hline
-	\rownum & 2021.09.07. & Layout tréning \\ \hline
-	\rownum & 2021.09.08. & Céges kültéri esemény \\ \hline
-	\rownum & 2021.09.08. & Céges kültéri esemény \\ \hline
-	\rownum & 2021.09.10. & Git/Sourcetree beüzemelés \\ \hline
-	\rownum & 2021.09.13. & Git/Sourcetree gyakorlás \\ \hline
-	\rownum & 2021.09.13. & PADS tréning \\ \hline
-	\rownum & 2021.09.16. & Board design frissítés (alkatrészek cseréje és séma frissítése) \\ \hline
-	\rownum & 2021.09.16. & Board design frissítés \\ \hline
-	\rownum & 2021.09.17. & Board design frissítés \\ \hline
-	\rownum & 2021.09.17. & Board design frissítés \\ \hline
-	\rownum & 2021.09.20. & Hatótáv mérés megtervezése \\ \hline
-	\rownum & 2021.09.23. & Hatótáv mérés kikísérletezése \\ \hline
-	\rownum & 2021.09.23. & Hatótáv mérése a Duna partján \\ \hline
-	\rownum & 2021.09.24. & Hatótáv mérése a Duna partján \\ \hline
-	\rownum & 2021.09.24. & Hatótáv mérése a Duna partján \\ \hline
-	$\sum$ & 220 óra& \\ \hline
+	\rownum & 2022.01.17. & Mérési hiba okának keresése \\ \hline
+	$\sum$ & Y óra& \\ \hline
 	\end{tabular}
 \end{table}
 \vspace{.5 cm} \\
