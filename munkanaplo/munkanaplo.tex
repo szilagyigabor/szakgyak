@@ -1,90 +1,83 @@
-\documentclass[a4paper,12pt,titlepage]{article}
-
-\usepackage{ucs}
-\usepackage[T1]{fontenc}
+\documentclass[10pt,a4paper,oneside]{report}
 \usepackage[utf8]{inputenc}
 \usepackage[magyar]{babel}
-\usepackage{amsfonts}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{graphicx}
-\usepackage[hang]{caption}
-\usepackage{subcaption}
-\usepackage{epsfig}
-\usepackage{enumerate}
-\usepackage{psfrag}
-\usepackage[left=20mm,right=20mm,top=20mm,bottom=25mm]{geometry}
-% \usepackage[left=10mm,right=10mm,top=10mm,bottom=15mm]{geometry} %landscape
-\usepackage[hyphenbreaks]{breakurl}
-\usepackage[hyphens]{url}
-\usepackage{multirow}
-\usepackage{booktabs}
-\usepackage{tikz}
-\usepackage{hyperref}
-\usepackage{listings}
-\usepackage{csquotes}
-\usepackage{siunitx}
-\hypersetup{
-	colorlinks,
-	linkcolor={red!50!black},
-	citecolor={blue!50!black},
-	urlcolor={blue!80!black}
-}
+\usepackage[T1]{fontenc}
+\usepackage{setspace}
 
-% \newcommand{\zi}{z^{-1}}
-% \newcommand{\zii}{z^{-2}}
-% \newcommand{\ejth}{e^{-j\vartheta}}
-% \newcommand{\ejtth}{e^{-j2\vartheta}}
-% \newcommand{\Ohm}{\Omega}
-% \newcommand{\jw}{j\omega}
-% \newcommand{\jwn}{(\jw)^2}
-\newcommand{\cpv}[1]{\overline{#1}}
-\newcommand{\Ukcs}{\cpv{U}}
-\newcommand{\Icpv}{\cpv{I}}
-\newcommand{\Ucpv}{\cpv{U}}
-\usetikzlibrary{arrows.meta}
+\pagenumbering{gobble}
+\usepackage[left=15mm,right=15mm,top=10mm,bottom=5mm]{geometry}\pagestyle{plain}
 
-\pagestyle{plain} 
+\singlespacing
+% \onehalfspacing
 
-\definecolor{codegreen}{rgb}{0,0.6,0}
-\definecolor{codegray}{rgb}{0.5,0.5,0.5}
-\definecolor{codepurple}{rgb}{0.58,0,0.82}
-\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\setlength{\columnsep}{1 cm}
 
-\lstdefinestyle{mystyle}{
-    backgroundcolor=\color{backcolour},   
-    commentstyle=\color{codegreen},
-    keywordstyle=\color{magenta},
-    numberstyle=\tiny\color{codegray},
-    stringstyle=\color{codepurple},
-    basicstyle=\ttfamily\scriptsize,
-    breakatwhitespace=false,         
-    breaklines=true,                 
-    captionpos=b,                    
-    keepspaces=true,                 
-    numbers=left,                    
-    numbersep=5pt,                  
-    showspaces=false,                
-    showstringspaces=false,
-    showtabs=false,                  
-    tabsize=2
-}
+\newcounter{magicrownumbers}
+\newcommand\rownum{\stepcounter{magicrownumbers}\arabic{magicrownumbers}}
 
-\lstset{style=mystyle}
-
-\title{
-\includegraphics[width=0.6\textwidth]{kep/bme_logo.pdf} \\
-\centering
-\large{\textbf{Budapesti Műszaki és Gazdaságtudományi Egyetem}\\
-\textbf{Villamosmérnöki és Informatikai Kar}\\
-\textbf{Szélessávú Hírközlés és Villamosságtan Tanszék}}\\
-\vspace{6cm}
-\huge{\textbf{Szakmai Gyakorlat Beszámoló}} \\
-\vspace{2cm}}
-\author{Szilágyi Gábor \\\vspace{2cm}\\ Konzulens: Bódi Tamás}
-\date{Budapest, 2021.}
-  
 
 \begin{document}
-  	\maketitle
+\begin{center}
+	\Large{Szakmai Gyakorlat Munkanapló}
+\end{center}
+\begin{tabular}{p{0.25\textwidth} p{0.75\textwidth}}
+	\textbf{Név:} & Szilágyi Gábor \\
+	\textbf{NEPTUN:} & NOMK01 \\
+	\textbf{Képzés:} & MSc \\
+	\textbf{Gyakorlat Időtartama:} & 6 hét\\
+	\textbf{Intézmény:} & Silicon Laboratories Hungary Kft.\\
+	\textbf{Intézmény székhelye:} & 1033 Budapest, Ángel Sanz Briz út 13. \\
+	\textbf{Gyakorlóhelyi Konzulens:} & Bódi Tamás
+\end{tabular}
+\begin{table}[h!]
+	\centering
+	\small
+	\begin{tabular}{| c | p{3 cm} | p{10 cm} |}
+	\hline
+	 & Dátum & Tevékenység (Megjegyzés: Az egyes sorok 4 órát jelentenek) \\ \hline \hline
+	\rownum & 2022.06.16. & Vezetett modulációs faktor mérés \\ \hline
+	\rownum & 2022.06.16. & Vezetett modulációs faktor mérés \\ \hline
+	\rownum & 2022.06.17. & Sugárzott modulációs faktor mérés \\ \hline
+	\rownum & 2022.06.17. & Sugárzott modulációs faktor mérés \\ \hline
+	\rownum & 2021.06.20. & Modul vezetett harmonikus mérés \\ \hline
+	\rownum & 2021.06.20. & Modul sugárzott nyereség és iránykarakterisztika mérés  \\ \hline
+	\rownum &  &  \\ \hline
+	\rownum &  &  \\ \hline
+	\rownum &  &  \\ \hline
+	\rownum &  &  \\ \hline
+	\rownum &  &  \\ \hline
+	\rownum &  &  \\ \hline
+	\rownum &  &  \\ \hline
+	\rownum &  &  \\ \hline
+	\rownum &  &  \\ \hline
+	\rownum &  &  \\ \hline
+	\rownum &  &  \\ \hline
+	\rownum &  &  \\ \hline
+	\rownum &  &  \\ \hline
+	\rownum &  &  \\ \hline
+	\rownum &  &  \\ \hline
+	\rownum &  &  \\ \hline
+	\rownum &  &  \\ \hline
+	\rownum &  &  \\ \hline
+	\rownum &  &  \\ \hline
+	\rownum &  &  \\ \hline
+	\rownum &  &  \\ \hline
+	\rownum &  &  \\ \hline
+	\rownum &  &  \\ \hline
+	\rownum &  &  \\ \hline
+	\rownum &  &  \\ \hline
+	\rownum &  &  \\ \hline
+	\rownum &  &  \\ \hline
+	\rownum &  &  \\ \hline
+	\rownum &  &  \\ \hline
+	\rownum &  &  \\ \hline
+	\rownum &  &  \\ \hline
+	\rownum &  &  \\ \hline
+	\rownum &  &  \\ \hline
+	\rownum &  &  \\ \hline
+	$\sum$ & 160 óra& \\ \hline
+	\end{tabular}
+\end{table}
+\vspace{.5 cm} \\
+Gyakorlóhelyi konzulens:
 \end{document}
