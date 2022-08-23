@@ -1,11 +1,10 @@
-[0] Szakmai gyakorlat (BMEVIHVMS01)											(muszáj)
-[4] Heterogén számítási rendszerek (BMEVIMIMA15)							(mellékspec.)
-[4] Mikrorendszerek tervezése (BMEVIMIMA14)									(mellékspec.)
-[4] Elektromágneses terek (BMEVIHVMA08)										(választható term. tud.)
-[5] Önálló laboratórium 2 (BMEVIHVML03)										(önlab főspec.)
+[0] Szakmai gyakorlat (BMEVIHVMS01)						(muszáj)
+[4] Heterogén számítási rendszerek (BMEVIMIMA15)				(mellékspec.)
+[4] Mikrorendszerek tervezése (BMEVIMIMA14)					(mellékspec.)
+[4] Elektromágneses terek (BMEVIHVMA08)						(választható term. tud.)
+[5] Önálló laboratórium 2 (BMEVIHVML03)						(önlab főspec.)
 [3] Felsőbb matematika villamosmérnököknek - Sztochasztika (BMETE90MX55)	(muszáj)
-[4] Nagyfrekvenciás elektronika (BMEVIHVMA03)								(főspec.)
+[4] Nagyfrekvenciás elektronika (BMEVIHVMA03)					(főspec.)
 [4] Navigációs és helyalapú szolgáltatások és alkalmazások (BMEVITMMA07)	(főspec.)
-[28]
-
-[4] Fizika 3 (BMETE11MX33) nem jó mert nem indul, csak tavasszal			(főspec.)
+[4] Mérnöki Menedzsment (BMEVITMMB03)						(mérn. men.)
+[32]
