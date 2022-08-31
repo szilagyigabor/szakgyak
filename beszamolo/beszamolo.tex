@@ -45,7 +45,7 @@
 %\newcommand{\Ucpv}{\cpv{U}}
 %\usetikzlibrary{arrows.meta}
 
-\pagestyle{plain} 
+%\pagestyle{plain} 
 
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
@@ -76,33 +76,101 @@
 \title{
 \centering
 \includegraphics[width=0.6\textwidth]{kep/bme_logo.pdf} \\
+\vspace{0.5cm}
 \large{\textbf{Budapesti Műszaki és Gazdaságtudományi Egyetem}\\
 \textbf{Villamosmérnöki és Informatikai Kar}\\
 \textbf{Szélessávú Hírközlés és Villamosságtan Tanszék}}\\
-\vspace{6cm}
+\vspace{5cm}
 \huge{\textbf{MSc Szakmai Gyakorlat Beszámoló}} \\
-\vspace{2cm}}
+\vspace{3cm}}
 
 \author{Szilágyi Gábor \\\vspace{2cm}\\ Konzulens: Bódi Tamás}
 \date{Budapest, \today}
   
 
 \begin{document}
-	\maketitle
-	\section{Bevezetés}
-	A Silicon Laboratories Hungary kft-nél 2021 júliusában kezdtem el dolgozni gyakornokként és az elmúlt évben sokat tanultam a munkám során. Az MSc-s szakmai gyakorlat ledokumentált időtartama alatt már komolyabb feladataim voltak, mint a gyakornokoskodásom elején. Ezeket az elvégzett feladatokat, a használt eszközöket és keretrendszert mutatom be ebben a beszámolóban. A cégen belül a ,,Hardware Tools'' csapatban dolgoztam, ez a csapat elsősorban a rádiós demonstrációs áramkörök tervezéséért és az ezekhez kapcsolódó mérésekért felelős.
-	\subsection{A cégről}
-		A fent említett cég a Silicon Laboratories (SiLabs) austini központú (USA, Texas), multinacionális vállalat budapesti alvállalata. A cég rendelkezik irodákkal Austinon és Budaesten kívül többek között Hyderabadban (India) Osloban (Norvégia) és Rennes-ben (Franciaország). A világ több sarkában való működés ellenére összesen körülbelül 2000-en dolgoznak a cégnél, a budapesti iroda jelenlegi létszáma 200 körüli, ami a cégen belül az egyik legnépesebb helyszínnek számít. Az egyes helyszínek valamelyest specializálódtak a feladatkörükben, például Austinban történik maguknak a szilícium chipeknek a fejlesztése, Budapesten hardver validációval és szoftverfejlesztéssel foglalkoznak nagy számban, norvégiában pedig a demonstrációs áramkörök gyártása történik.
-		\par
-		A SiLabs profilja a rádiós vagy rádió nélküli mikrokontroller integrált áramkörök (IC-k) tervezése, eladása, valamint hardveres és szoftveres támogatás nyújtása ezekhez az ügyfeleknek. Az ügyfelek nem végfelhasználók, hanem más cégek, akik a SiLabs chipjeit és támogatását felhasználva készítenek termékeket. Ilyen ügyfél például az Ikea, az Amazon, a Google és az Apple. Az Ikea példájánál maradva, a projekt, amivel személyesen találkoztam és ehhez az ügyfélhez köthető, az okos villanykörtékbe szánt rádiós modulok. Egy másik egyszerűbb alkalmazása a SiLabs rádióinak a kapunyitó távirányító, amikkel gyakran találkozom a laborban a munkatársaimnál. A komplexebb alkalmazások közé tartoznak az okos otthon kialakításához használható eszközök. Ilyen az Amazon Alexa nevű terméke, amely az okos otthon rendszer egy központi, irányító eleme lehet, de ennek a rendszernek más elemei is használhatnak SiLabs chipeket, mint például az okos szenzorok vagy vezérlőeszközök.
-		\par
-		A Hardware Tools csapat által tervezett és tesztelt demonstrációs áramkörök referencia implementációként szolgálnak a kérdéses IC-ket használó eszközökhöz. Ezeknek az áramköröknek a rádiófrekvenciás része főleg nagyobb frekvenciákon (pl. 2,4 GHz) nagyon érzékeny a nyomtatott áramköri rajz mintázatára és a beültetett alkatrészek elhelyezkedésére. Egy jól működő implementációtól való kis mértékű eltérés is nagyban ronthatja az áramkör teljesítőképességét több szempontból is. Ilyenkor legtöbbször az fordul elő, hogy az alapharmonikus frekvencián, ahol a hasznos adatátvitel történik, lecsökken a kisugárzott teljesítmény és a vételi érzékenység. Egy másik tünete a rosszul megtervezett NYÁK-nak a felharmonikus frekvenciákon a megnövekedett kisgugárzott teljesítmény. Az első probléma miatt az eszköz nem tudja elég jól vagy egyáltalán ellátni a feladatát, a második probléma miatt pedig más eszközök működését akadályozhatja, mivel nem felel meg az elelktromágneses kompatibilitási (EMC) követelményeknek.
-	\section{RF Mérés}
-		A szakmai gaykorlatom során elsősorban a demonstrációs áramkörök rádiófrekvenciás részének fejlesztésével, tesztelésével foglalkoztam. A kérdéses áramköröknél RF szempontból a legtöbb fejfájást az antenna és a végfokerősítő közötti illesztőhálózat okozza. Ez a hálózat azokon az áramkörökön, amikkel én találkoztam, legtöbbször egy 5-elemű szűrő-és illesztőfokozat, ami diszkrét tekercsekből és kondenzátorokból van felépítve a NyHL-en.
-		\subsection{Vezetett mérés}
-		\subsection{Sugárzott mérés}
-		\subsection{Modulációs faktor}
-	\section{NyHL tervezés}
-		\subsection{Kapcsolási rajz}
-		\subsection{Nyomtatott huzalozási rajz}
+    \maketitle
+    \section{Bevezetés}
+    A Silicon Laboratories Hungary kft-nél 2021 júliusában kezdtem el dolgozni gyakornokként és az elmúlt évben sokat tanultam a munkám során. Az MSc-s szakmai gyakorlat ledokumentált időtartama alatt már komolyabb feladataim voltak, mint a gyakornokoskodásom elején. Ezeket az elvégzett feladatokat, a használt eszközöket és keretrendszert mutatom be ebben a beszámolóban. A cégen belül a ,,Hardware Tools'' csapatban dolgoztam, ez a csapat elsősorban a rádiós demonstrációs áramkörök tervezéséért és az ezekhez kapcsolódó mérésekért felelős.
+    \subsection{A cégről}
+        A fent említett cég a Silicon Laboratories (SiLabs) austini központú (USA, Texas), multinacionális vállalat budapesti alvállalata. A cég rendelkezik irodákkal Austinon és Budaesten kívül többek között Hyderabadban (India) Osloban (Norvégia) és Rennes-ben (Franciaország). A világ több sarkában való működés ellenére összesen körülbelül 2000-en dolgoznak a cégnél, a budapesti iroda jelenlegi létszáma 200 körüli, ami a cégen belül az egyik legnépesebb helyszínnek számít. Az egyes helyszínek valamelyest specializálódtak a feladatkörükben, például Austinban történik maguknak a szilícium chipeknek a fejlesztése, Budapesten hardver validációval és szoftverfejlesztéssel foglalkoznak nagy számban, norvégiában pedig a demonstrációs áramkörök gyártása történik.
+        \par
+        A SiLabs profilja a rádiós vagy rádió nélküli mikrokontroller integrált áramkörök (IC-k) tervezése, eladása, valamint hardveres és szoftveres támogatás nyújtása ezekhez az ügyfeleknek. Az ügyfelek nem végfelhasználók, hanem más cégek, akik a SiLabs chipjeit és támogatását felhasználva készítenek termékeket. Ilyen ügyfél például az Ikea, az Amazon, a Google és az Apple. Az Ikea példájánál maradva, a projekt, amivel személyesen találkoztam és ehhez az ügyfélhez köthető, az okos villanykörtékbe szánt rádiós modulok. Egy másik egyszerűbb alkalmazása a SiLabs rádióinak a kapunyitó távirányító, amikkel gyakran találkozom a laborban a munkatársaimnál. A komplexebb alkalmazások közé tartoznak az okos otthon kialakításához használható eszközök. Ilyen az Amazon Alexa nevű terméke, amely az okos otthon rendszer egy központi, irányító eleme lehet, de ennek a rendszernek más elemei is használhatnak SiLabs chipeket, mint például az okos szenzorok vagy vezérlőeszközök.
+        \par
+        A Hardware Tools csapat által tervezett és tesztelt demonstrációs áramkörök referencia implementációként szolgálnak a kérdéses IC-ket használó eszközökhöz. Ezeknek az áramköröknek a rádiófrekvenciás része főleg nagyobb frekvenciákon (pl. 2,4 GHz) nagyon érzékeny a nyomtatott áramköri rajz mintázatára és a beültetett alkatrészek elhelyezkedésére. Egy jól működő implementációtól való kis mértékű eltérés is nagyban ronthatja az áramkör teljesítőképességét több szempontból is. Ilyenkor legtöbbször az fordul elő, hogy az alapharmonikus frekvencián, ahol a hasznos adatátvitel történik, lecsökken a kisugárzott teljesítmény és a vételi érzékenység. Egy másik tünete a rosszul megtervezett NYÁK-nak a felharmonikus frekvenciákon a megnövekedett kisgugárzott teljesítmény. Az első probléma miatt az eszköz nem tudja elég jól vagy egyáltalán ellátni a feladatát, a második probléma miatt pedig más eszközök működését akadályozhatja, mivel nem felel meg az elelktromágneses kompatibilitási (EMC) követelményeknek.
+    \section{RF Mérés}
+        A szakmai gaykorlatom során elsősorban a demonstrációs áramkörök rádiófrekvenciás részének fejlesztésével, tesztelésével foglalkoztam. A kérdéses áramköröknél RF szempontból a legtöbb fejfájást az antenna és a végfokerősítő közötti illesztőhálózat okozza. Ez a hálózat azokon az áramkörökön, amikkel én találkoztam, legtöbbször egy 5-elemű szűrő- és illesztőfokozat, ami diszkrét tekercsekből és kondenzátorokból van felépítve az NyHL-en. Az illesztőhálózatnak sokféle változata van használatban a különböző áramkörökön, mert több szempont határozza meg együttesen az ideális tulajdonságokat.
+        \par
+        Az első és legnyilvánvalóbb ilyen szempont a működési frekvencia. Értelemszerűen ha más frekvencián működik a rádió, akkor más elemértékekkel lehet hasonló szűrő és impedanciaillesztő hatást elérni. A gyakran előforduló működési frekvenciák: \SI{2,4}{GHz}, \SI{915}{MHz}, \SI{868}{MHz} és \SI{470}{MHz}, de előfordulhatnak még olyanok, amikkel csak én nem találkoztam a munkám során, de tervez ilyen frekvenciákra is eszközöket a cég. Ezek elsősorban \SI{915}{MHz} vagy \SI{470}{MHz} környékén lehetnek, amelyik tartományokban tudtommal a világ különböző részein más-más frekvenciasáv van kijelölve ISM (Industrial Scientific Medical) használatra, amilyen sávokban ezek az eszközök működhetnek. Az elemértékek meghatározásán kívül még egy érdekes hatása van a működési frekvenciának az áramkör tervezésénél. A \SI{2,4}{GHz}-es és szub-\SI{}{GHz}-es áramköröknél jelentős különbség van abban, hogy mennyire érzékeny az illesztőhálózat viselkedése a struktúra geometriájára. Nem meglepő módon nagyobb frekvencián, ahol a működési hullámhossz, de főleg a felharmonikus hullámhosszak közelebb vannak az RF áramköri rész méreteihez, a viselkedést komolyan befolyásolja a geometria. Ezzel szemben nagyobb hullámhosszaknál ez a hatás lecsökken és sokkal szabadabban lehet átrendezgetni az NyHL-en az alkatrészeket mindenféle helytakarékossági és egyéb szempont alapján, persze a topológia megtartásával.
+        \par
+        Egy másik szempont az illesztőhálózat tervezésénél a rádió végfokerősítőjének a kimeneti impedanciája. Az illesztőhálózat egyik fontos feladata, hogy kis reflexióval és veszteséggel illessze a végfok kimeneti impedanciáját a NyHL-en található \SI{50}{OHm}-os mikroszalagvonalhoz (microstrip line). Az egyes rádiós IC-k többféle teljesítményszinttel készülnek, így még egy típuson belül is többféle végfokerősítőhöz kell különböző illesztőhálózatot tervezni. A gyakran előforduló teljesítményszintek közül néhány: \SI{0}{dBm}, \SI{6}{dBm}, \SI{10}{dBm}, \SI{14}{dBm}, \SI{16}{dBm} és \SI{20}{dBm}.
+        \par
+        Még egy fontos szempontcsoportot alkotnak a hordozó paraméterei. Ilyenek például a szubsztrát dielektromos állandója és a rézrétegek közötti távolság. Mindkettő a parazita hatások kialakulásában játszik fontos szerepet, emiatt előfordul, hogy csak a rézrétegek közötti hézag változtatása miatt (pl. áttérés 4 rétegű hordozóról 2 rétegűre) teljesen újra kell tervezni az illesztőhálózatot. A fenti példában a nagyobb rétegtávolság a szomszédos rézrétegek között csökkenti a parazita kapacitást, ugyanakkor megnöveli a szomszédos rétegek között kialakuló áramhurok hosszát, így növelve annak az áramútnak parazita induktivitását. Hasonló jelenségek miatt ilyen helyzetben könnyen lehet, hogy még az illesztőhálózat topológiáján vagy elemszámán is változtatni kell, hogy megfelelően működjön.
+        \subsection{Vezetett mérés}
+            dolgok
+            \begin{figure}
+                \centering
+                \includegraphics[width=0.6\textwidth]{kep/szerkesztett/sip-modul.jpg}
+                \caption{sip-modul}
+                \label{fig:sip}
+            \end{figure}
+
+            \begin{figure}
+                \centering
+                \includegraphics[width=0.6\textwidth]{kep/szerkesztett/anritsu.jpg}
+                \caption{anritsu}
+                \label{fig:anritsu}
+            \end{figure}
+
+            \begin{figure}
+                \centering
+                \includegraphics[width=0.33\textwidth]{kep/szerkesztett/botantenna_XY.jpg}
+                \includegraphics[width=0.33\textwidth]{kep/szerkesztett/botantenna_XZ.jpg}
+                \includegraphics[width=0.33\textwidth]{kep/szerkesztett/botantenna_YZ.jpg}
+                \caption{botantenna}
+                \label{fig:botantenna}
+            \end{figure}
+
+            \begin{figure}
+                \centering
+                \includegraphics[width=0.6\textwidth]{kep/szerkesztett/fsv.jpg}
+                \caption{fsv}
+                \label{fig:fsv}
+            \end{figure}
+
+            \begin{figure}
+                \centering
+                \includegraphics[width=0.6\textwidth]{kep/szerkesztett/pigtail1.jpg}
+                \includegraphics[width=0.6\textwidth]{kep/szerkesztett/pigtail2.jpg}
+                \caption{pigtailek}
+                \label{fig:pigtail}
+            \end{figure}
+
+            \begin{figure}
+                \centering
+                \includegraphics[width=0.6\textwidth]{kep/szerkesztett/vna.jpg}
+                \caption{VNA}
+                \label{fig:vna}
+            \end{figure}
+
+            \begin{figure}
+                \centering
+                \includegraphics[width=0.6\textwidth]{kep/szerkesztett/sol-470-conducted.png}
+                \caption{470 MHz sol conducted}
+                \label{fig:sol-470-conducted.png}
+            \end{figure}
+
+            \begin{figure}
+                \centering
+                \includegraphics[width=0.6\textwidth]{kep/szerkesztett/sol-868-conducted.png}
+                \caption{868 MHz sol conducted}
+                \label{fig:sol-868-conducted.png}
+            \end{figure}
+
+
+        \subsection{Sugárzott mérés}
+        \subsection{Modulációs faktor}
+    \section{NyHL tervezés}
+        \subsection{Kapcsolási rajz}
+        \subsection{Nyomtatott huzalozási rajz}
 \end{document}
