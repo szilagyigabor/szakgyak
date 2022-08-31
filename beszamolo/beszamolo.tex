@@ -1,6 +1,6 @@
 \documentclass[a4paper,12pt,titlepage]{article}
 
-%\usepackage{ucs}
+\usepackage{ucs}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[magyar]{babel}
@@ -10,7 +10,6 @@
 \usepackage{graphicx}
 \usepackage[hang]{caption}
 %\usepackage{subcaption}
-%\usepackage{epsfig}
 \usepackage{enumerate}
 %\usepackage{psfrag}
 \usepackage[left=20mm,right=20mm,top=20mm,bottom=25mm]{geometry}
@@ -19,12 +18,12 @@
 \usepackage[hyphens]{url}
 %\usepackage{multirow}
 %\usepackage{booktabs}
-%\usepackage{tikz}
 \usepackage{hyperref}
 \usepackage{listings}
 %\usepackage{csquotes}
 \usepackage{siunitx}
 \usepackage{xcolor}
+%\usepackage[a-3u]{pdfx}
 
 \hypersetup{
 	colorlinks,
@@ -40,10 +39,10 @@
 % \newcommand{\Ohm}{\Omega}
 % \newcommand{\jw}{j\omega}
 % \newcommand{\jwn}{(\jw)^2}
-\newcommand{\cpv}[1]{\overline{#1}}
-\newcommand{\Ukcs}{\cpv{U}}
-\newcommand{\Icpv}{\cpv{I}}
-\newcommand{\Ucpv}{\cpv{U}}
+%\newcommand{\cpv}[1]{\overline{#1}}
+%\newcommand{\Ukcs}{\cpv{U}}
+%\newcommand{\Icpv}{\cpv{I}}
+%\newcommand{\Ucpv}{\cpv{U}}
 %\usetikzlibrary{arrows.meta}
 
 \pagestyle{plain} 
@@ -75,22 +74,23 @@
 \lstset{style=mystyle}
 
 \title{
-\includegraphics[width=0.6\textwidth]{kep/bme_logo.pdf} \\
 \centering
+\includegraphics[width=0.6\textwidth]{kep/bme_logo.pdf} \\
 \large{\textbf{Budapesti Műszaki és Gazdaságtudományi Egyetem}\\
 \textbf{Villamosmérnöki és Informatikai Kar}\\
 \textbf{Szélessávú Hírközlés és Villamosságtan Tanszék}}\\
 \vspace{6cm}
 \huge{\textbf{MSc Szakmai Gyakorlat Beszámoló}} \\
 \vspace{2cm}}
+
 \author{Szilágyi Gábor \\\vspace{2cm}\\ Konzulens: Bódi Tamás}
 \date{Budapest, \today}
   
 
 \begin{document}
-  	\maketitle
+	\maketitle
 	\section{Bevezetés}
-	A Silicon Laboratories Hungary kft-nél 2021 júliusában kezdtem el dolgozni gyakornokként és az elmúlt évben sokat tanultam a munkám során. Az MSc-s szakmai gyakorlat ledokumentált időtartama alatt már komolyabb feladataim voltak, mint a gyakornokoskodásom elején, ezeket az elvégzett feladatokat, a használt eszközöket és keretrendszert mutatom be ebben a beszámolóban. A cégen belül a ,,Hardware Tools" csapatban dolgoztam, ez a csapat elsősorban a rádiós demonstrációs áramkörök tervezéséért és az ezekhez kapcsolódó mérésekért felelős.
+	A Silicon Laboratories Hungary kft-nél 2021 júliusában kezdtem el dolgozni gyakornokként és az elmúlt évben sokat tanultam a munkám során. Az MSc-s szakmai gyakorlat ledokumentált időtartama alatt már komolyabb feladataim voltak, mint a gyakornokoskodásom elején. Ezeket az elvégzett feladatokat, a használt eszközöket és keretrendszert mutatom be ebben a beszámolóban. A cégen belül a ,,Hardware Tools'' csapatban dolgoztam, ez a csapat elsősorban a rádiós demonstrációs áramkörök tervezéséért és az ezekhez kapcsolódó mérésekért felelős.
 	\subsection{A cégről}
 		A fent említett cég a Silicon Laboratories (SiLabs) austini központú (USA, Texas), multinacionális vállalat budapesti alvállalata. A cég rendelkezik irodákkal Austinon és Budaesten kívül többek között Hyderabadban (India) Osloban (Norvégia) és Rennes-ben (Franciaország). A világ több sarkában való működés ellenére összesen körülbelül 2000-en dolgoznak a cégnél, a budapesti iroda jelenlegi létszáma 200 körüli, ami a cégen belül az egyik legnépesebb helyszínnek számít. Az egyes helyszínek valamelyest specializálódtak a feladatkörükben, például Austinban történik maguknak a szilícium chipeknek a fejlesztése, Budapesten hardver validációval és szoftverfejlesztéssel foglalkoznak nagy számban, norvégiában pedig a demonstrációs áramkörök gyártása történik.
 		\par
@@ -98,6 +98,7 @@
 		\par
 		A Hardware Tools csapat által tervezett és tesztelt demonstrációs áramkörök referencia implementációként szolgálnak a kérdéses IC-ket használó eszközökhöz. Ezeknek az áramköröknek a rádiófrekvenciás része főleg nagyobb frekvenciákon (pl. 2,4 GHz) nagyon érzékeny a nyomtatott áramköri rajz mintázatára és a beültetett alkatrészek elhelyezkedésére. Egy jól működő implementációtól való kis mértékű eltérés is nagyban ronthatja az áramkör teljesítőképességét több szempontból is. Ilyenkor legtöbbször az fordul elő, hogy az alapharmonikus frekvencián, ahol a hasznos adatátvitel történik, lecsökken a kisugárzott teljesítmény és a vételi érzékenység. Egy másik tünete a rosszul megtervezett NYÁK-nak a felharmonikus frekvenciákon a megnövekedett kisgugárzott teljesítmény. Az első probléma miatt az eszköz nem tudja elég jól vagy egyáltalán ellátni a feladatát, a második probléma miatt pedig más eszközök működését akadályozhatja, mivel nem felel meg az elelktromágneses kompatibilitási (EMC) követelményeknek.
 	\section{RF Mérés}
+		A szakmai gaykorlatom során elsősorban a demonstrációs áramkörök rádiófrekvenciás részének fejlesztésével, tesztelésével foglalkoztam. A kérdéses áramköröknél RF szempontból a legtöbb fejfájást az antenna és a végfokerősítő közötti illesztőhálózat okozza. Ez a hálózat azokon az áramkörökön, amikkel én találkoztam, legtöbbször egy 5-elemű szűrő-és illesztőfokozat, ami diszkrét tekercsekből és kondenzátorokból van felépítve a NyHL-en.
 		\subsection{Vezetett mérés}
 		\subsection{Sugárzott mérés}
 		\subsection{Modulációs faktor}

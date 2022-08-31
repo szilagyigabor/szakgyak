@@ -6,5 +6,93 @@
 [3] Felsőbb matematika villamosmérnököknek - Sztochasztika (BMETE90MX55)	(muszáj)
 [4] Nagyfrekvenciás elektronika (BMEVIHVMA03)					(főspec.)
 [4] Navigációs és helyalapú szolgáltatások és alkalmazások (BMEVITMMA07)	(főspec.)
-[4] Mérnöki Menedzsment (BMEVITMMB03)						(mérn. men.)
-[32]
+*[4] Mérnöki Menedzsment (BMEVITMMB03)						(mérn. men.)
+[4] Rádióátviteli mérések laboratórium (BMEVIHVMA04)				(főspec.)
+[36]
+
+A MÉRNÖKI MENEDZSMENTET LE KELL ADNI
+
+Tárgykategóriák						(tárgykód)	(kredit)	(indul  )	(időzítés)	(kész)
+
+	Felsőbb matematika villamosmérnököknek		(2 kötelező)
+
+		Haladó lineáris algebra			(BMETE90MX54)	( 3 kredit)	(mindegy)	( 8. félév)	(kész)
+		Sztochasztika				(BMETE90MX55)	( 3 kredit)	(mindegy)	( 9. félév)	(most)
+
+	Elágazó természettudományos tantárgy		(1 kötelező)
+
+		Fizika 3				(BMETE11MX33)	( 4 kredit)	(tavasz )	(10. félév)	(majd)
+		Elektromágneses terek			(BMEVIHVMA08)	( 4 kredit)	(ősz    )	(---------)	(----)
+
+	Választható természettudományos tantárgy	(1 kötelező)
+
+		Elektromágneses terek			(BMEVIHVMA08)	( 4 kredit)	(ősz    )	( 9. félév)	(most)
+		Fotonikai eszközök			(BMEVIETMA06)	( 4 kredit)	(mindegy)	(---------)	(----)
+		Kvantum-informatika és kommunikáció	(BMEVIHIMA14)	( 4 kredit)	(mindegy)	(---------)	(----)
+		Nanotudomány				(BMEVIETMA07)	( 4 kredit)	(mindegy)	(---------)	(----)
+		Villamos szigetelések és kisülések	(BMEVIVEMA14)	( 4 kredit)	(mindegy)	(---------)	(----)
+
+	Közös tantárgyak				(Hírközléselmélet kötelező, 1 másik választható)
+
+		Hírközléselmélet			(BMEVIHVMA07)	( 4 kredit)	(mindegy)	( 8. félév)	(kész)
+		Méréselmélet				(BMEVIMIMA17)	( 4 kredit)	(mindegy)	(10. félév)	(majd)
+		Minőségbiztosítás a mikroelektronikában	(BMEVIETMA05)	( 4 kredit)	(mindegy)	(---------)	(----)
+		Szoftvertervezés			(BMEVIIIMA15)	( 4 kredit)	(mindegy)	(---------)	(----)
+		Váltakozó áramú rendszerek		(BMEVIVEMA13)	( 4 kredit)	(mindegy)	(---------)	(----)
+
+	Mérnöki menedzsment				(Kötelező)
+
+		Mérnöki menedzsment			(BMEVITMMB03)	( 4 kredit)	(mindegy)	(10. félév)	(majd)
+
+	Választható humán és gazdasági tantárgyak	(3 db kötelező, 1 a 10. és 2 a 11. félévben ajánlott)
+
+		Befektetések				(-----------)	( 2 kredit)	(mindegy)	(10-11. félév)	(????)
+		Érvelés, tárgyalás, meggyőzés		(-----------)	( 2 kredit)	(mindegy)	(10-11. félév)	(????)
+		Információs társadalom joga		(-----------)	( 2 kredit)	(mindegy)	(10-11. félév)	(????)
+		Minőségmenedzsment			(-----------)	( 2 kredit)	(mindegy)	(10-11. félév)	(????)
+		Projektmenedzsment			(-----------)	( 2 kredit)	(mindegy)	(10-11. félév)	(????)
+		Vállalati jog				(-----------)	( 2 kredit)	(mindegy)	(10-11. félév)	(????)
+		Vezetői számvitel			(-----------)	( 2 kredit)	(mindegy)	(10-11. félév)	(????)
+		Pénzügyi technológiák (FinTech) alapjai	(-----------)	( 2 kredit)	(mindegy)	(10-11. félév)	(????)
+
+	Főspecializáció tantárgyak			(Mind kötelező)
+
+		Mobil és vezetéknélküli hálózatok	(BMEVIHIMA07)	( 4 kredit)	(tavasz )	( 8. félév)	(kész)
+		Szélesszájú				(BMEVIHVMA01)	( 4 kredit)	(tavasz )	( 8. félév)	(kész)
+		Antennák, hullámterjedés és mik. táv.	(BMEVIHVMA02)	( 4 kredit)	(tavasz )	( 8. félév)	(kész)
+		Navigációs és helyalapú szolg. és alk.	(BMEVIHIMA07)	( 4 kredit)	(ősz    )	( 9. félév)	(most)
+		Nagyfrekvenciás elektronika		(BMEVIHIMA07)	( 4 kredit)	(ősz    )	( 9. félév)	(most)
+
+	Főspecializáció labor
+
+		Rádióátviteli mérések laboratórium 1.	(BMEVIHVMA04)	( 4 kredit)	(mindegy)	( 9. félév)	(most)
+		Rádióátviteli mérések laboratórium 2.	(BMEVIHVMB02)	( 4 kredit)	(mindegy)	(10. félév)	(majd)
+		
+	Mellékspecializáció tantárgyak
+
+		Logikai tervezés			(BMEVIMIMA13)	( 4 kredit)	(mindegy)	( 8. félév)	(kész)
+		Mikrorendszerek tervezése		(BMEVIMIMA14)	( 4 kredit)	(mindegy)	( 9. félév)	(most)
+		Heterogén számítási rendszerek		(BMEVIMIMA15)	( 4 kredit)	(mindegy)	( 9. félév)	(most)
+
+	Mellékspecializáció labor
+
+		FPGA tervezői laboratórium		(BMEVIMIMB04)	( 4 kredit)	(mindegy)	(10. félév)	(kész)
+
+	Önálló laboratórium
+
+		Önálló laboratórium 1.			(BMEVIHVML02)	( 5 kredit)	(mindegy)	( 8. félév)	(kész)
+		Önálló laboratórium 2.			(BMEVIHVML03)	( 5 kredit)	(mindegy)	( 9. félév)	(most)
+
+	Diplomatervezés
+
+		Diplomatervezés 1.			(BMEVIHVMT02)	(10 kredit)	(mindegy)	(10. félév)	(majd)
+		Diplomatervezés 2.			(BMEVIHVMT03)	(20 kredit)	(mindegy)	(11. félév)	(majd)
+
+	Szabadon választható tantárgy			(összesen 6 kredit kötelező, de 18 lehetséges)
+
+		Mikrohullámú áramkörök terv. és szim.	(BMEVIHVAV08)	( 4 kredit)	(mindegy)	( 8. félév)	(kész)
+		???
+
+	Szakmai gyakorlat
+
+		Szakmai gyakorlat			(BMEVIHVMS01)	( 0 kredit)	(mindegy)	( 9. félév)	(most)
