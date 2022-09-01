@@ -9,7 +9,7 @@
 \usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage[hang]{caption}
-%\usepackage{subcaption}
+\usepackage{subcaption}
 \usepackage{enumerate}
 %\usepackage{psfrag}
 \usepackage[left=20mm,right=20mm,top=20mm,bottom=25mm]{geometry}
@@ -93,13 +93,23 @@
     \section{Bevezetés}
     A Silicon Laboratories Hungary kft-nél 2021 júliusában kezdtem el dolgozni gyakornokként és az elmúlt évben sokat tanultam a munkám során. Az MSc-s szakmai gyakorlat ledokumentált időtartama alatt már komolyabb feladataim voltak, mint a gyakornokoskodásom elején. Ezeket az elvégzett feladatokat, a használt eszközöket és keretrendszert mutatom be ebben a beszámolóban. A cégen belül a ,,Hardware Tools'' csapatban dolgoztam, ez a csapat elsősorban a rádiós demonstrációs áramkörök tervezéséért és az ezekhez kapcsolódó mérésekért felelős.
     \subsection{A cégről}
-        A fent említett cég a Silicon Laboratories (SiLabs) austini központú (USA, Texas), multinacionális vállalat budapesti alvállalata. A cég rendelkezik irodákkal Austinon és Budaesten kívül többek között Hyderabadban (India) Osloban (Norvégia) és Rennes-ben (Franciaország). A világ több sarkában való működés ellenére összesen körülbelül 2000-en dolgoznak a cégnél, a budapesti iroda jelenlegi létszáma 200 körüli, ami a cégen belül az egyik legnépesebb helyszínnek számít. Az egyes helyszínek valamelyest specializálódtak a feladatkörükben, például Austinban történik maguknak a szilícium chipeknek a fejlesztése, Budapesten hardver validációval és szoftverfejlesztéssel foglalkoznak nagy számban, norvégiában pedig a demonstrációs áramkörök gyártása történik.
+        A fent említett cég a Silicon Laboratories (SiLabs) austini központú (USA, Texas), multinacionális vállalat budapesti alvállalata. A cég rendelkezik irodákkal Austinon és Budaesten kívül többek között Hyderabadban (India), Osloban (Norvégia) és Rennes-ben (Franciaország). A világ több sarkában való működés ellenére összesen körülbelül 2000-en dolgoznak a cégnél, a budapesti iroda jelenlegi létszáma 200 körüli, ami a cégen belül az egyik legnépesebb helyszínnek számít. Az egyes helyszínek valamelyest specializálódtak a feladatkörükben, például Austinban történik maguknak a szilícium chipeknek a fejlesztése, Budapesten hardver validációval és szoftverfejlesztéssel foglalkoznak nagy számban, norvégiában pedig a demonstrációs áramkörök gyártása történik.
         \par
         A SiLabs profilja a rádiós vagy rádió nélküli mikrokontroller integrált áramkörök (IC-k) tervezése, eladása, valamint hardveres és szoftveres támogatás nyújtása ezekhez az ügyfeleknek. Az ügyfelek nem végfelhasználók, hanem más cégek, akik a SiLabs chipjeit és támogatását felhasználva készítenek termékeket. Ilyen ügyfél például az Ikea, az Amazon, a Google és az Apple. Az Ikea példájánál maradva, a projekt, amivel személyesen találkoztam és ehhez az ügyfélhez köthető, az okos villanykörtékbe szánt rádiós modulok. Egy másik egyszerűbb alkalmazása a SiLabs rádióinak a kapunyitó távirányító, amikkel gyakran találkozom a laborban a munkatársaimnál. A komplexebb alkalmazások közé tartoznak az okos otthon kialakításához használható eszközök. Ilyen az Amazon Alexa nevű terméke, amely az okos otthon rendszer egy központi, irányító eleme lehet, de ennek a rendszernek más elemei is használhatnak SiLabs chipeket, mint például az okos szenzorok vagy vezérlőeszközök.
         \par
         A Hardware Tools csapat által tervezett és tesztelt demonstrációs áramkörök referencia implementációként szolgálnak a kérdéses IC-ket használó eszközökhöz. Ezeknek az áramköröknek a rádiófrekvenciás része főleg nagyobb frekvenciákon (pl. 2,4 GHz) nagyon érzékeny a nyomtatott áramköri rajz mintázatára és a beültetett alkatrészek elhelyezkedésére. Egy jól működő implementációtól való kis mértékű eltérés is nagyban ronthatja az áramkör teljesítőképességét több szempontból is. Ilyenkor legtöbbször az fordul elő, hogy az alapharmonikus frekvencián, ahol a hasznos adatátvitel történik, lecsökken a kisugárzott teljesítmény és a vételi érzékenység. Egy másik tünete a rosszul megtervezett NYÁK-nak a felharmonikus frekvenciákon a megnövekedett kisgugárzott teljesítmény. Az első probléma miatt az eszköz nem tudja elég jól vagy egyáltalán ellátni a feladatát, a második probléma miatt pedig más eszközök működését akadályozhatja, mivel nem felel meg az elelktromágneses kompatibilitási (EMC) követelményeknek.
+        \par
+        A csapat által tervezett demonstrációs kitek egy néhány évvel ezelőtti példánya látható \aref{fig:wstkmighty}. ábrán. A nagy Silicon Labs logóval ellátott alaplap a Wireless Starter Kit Mainboard, amit ,,WSTK'' néven szoktunk emlegetni. A kisebb, ,,Mighty Gecko'' feliratú NyÁK a ,,radio board'', amit a WSTK vezérel.
+%
+            \begin{figure}
+                \centering
+                \includegraphics[width=0.8\textwidth]{kep/szerkesztett/wstk-mighty-gecko-nagy.jpg}
+                \caption{WSTK + radio board.}
+                \label{fig:wstkmighty}
+            \end{figure}
+%
     \section{RF Mérés}
-        A szakmai gaykorlatom során elsősorban a demonstrációs áramkörök rádiófrekvenciás részének fejlesztésével, tesztelésével foglalkoztam. A kérdéses áramköröknél RF szempontból a legtöbb fejfájást az antenna és a végfokerősítő közötti illesztőhálózat okozza. Ez a hálózat azokon az áramkörökön, amikkel én találkoztam, legtöbbször egy 5-elemű szűrő- és illesztőfokozat, ami diszkrét tekercsekből és kondenzátorokból van felépítve az NyHL-en. Az illesztőhálózatnak sokféle változata van használatban a különböző áramkörökön, mert több szempont határozza meg együttesen az ideális tulajdonságokat.
+        A szakmai gaykorlatom során elsősorban a demonstrációs áramkörök rádiófrekvenciás részének fejlesztésével, tesztelésével foglalkoztam. A kérdéses áramköröknél RF szempontból a legtöbb fejfájást az antenna és a végfokerősítő közötti illesztőhálózat okozza. Ez a hálózat azokon az áramkörökön, amikkel én találkoztam, legtöbbször egy 5-elemű szűrő- és illesztőfokozat, ami diszkrét tekercsekből és kondenzátorokból van felépítve az NyHL-en. Egy másik alkatrész, amit elsősorban szub-\SI{}{GHz}-en használnak a cégnél, az integrált balun használata, ami \aref{fig:wstkmighty}. ábrán lehet kivehető az U.FL csatlakozótól jobbra a ,,Mighty Gecko'' feliratú NyHL-en, mint barna, hatlábú alkatrész. Az illesztőhálózatnak sokféle változata van használatban a különböző áramkörökön, mert több szempont határozza meg együttesen az ideális tulajdonságokat.
         \par
         Az első és legnyilvánvalóbb ilyen szempont a működési frekvencia. Értelemszerűen ha más frekvencián működik a rádió, akkor más elemértékekkel lehet hasonló szűrő és impedanciaillesztő hatást elérni. A gyakran előforduló működési frekvenciák: \SI{2,4}{GHz}, \SI{915}{MHz}, \SI{868}{MHz} és \SI{470}{MHz}, de előfordulhatnak még olyanok, amikkel csak én nem találkoztam a munkám során, de tervez ilyen frekvenciákra is eszközöket a cég. Ezek elsősorban \SI{915}{MHz} vagy \SI{470}{MHz} környékén lehetnek, amelyik tartományokban tudtommal a világ különböző részein más-más frekvenciasáv van kijelölve ISM (Industrial Scientific Medical) használatra, amilyen sávokban ezek az eszközök működhetnek. Az elemértékek meghatározásán kívül még egy érdekes hatása van a működési frekvenciának az áramkör tervezésénél. A \SI{2,4}{GHz}-es és szub-\SI{}{GHz}-es áramköröknél jelentős különbség van abban, hogy mennyire érzékeny az illesztőhálózat viselkedése a struktúra geometriájára. Nem meglepő módon nagyobb frekvencián, ahol a működési hullámhossz, de főleg a felharmonikus hullámhosszak közelebb vannak az RF áramköri rész méreteihez, a viselkedést komolyan befolyásolja a geometria. Ezzel szemben nagyobb hullámhosszaknál ez a hatás lecsökken és sokkal szabadabban lehet átrendezgetni az NyHL-en az alkatrészeket mindenféle helytakarékossági és egyéb szempont alapján, persze a topológia megtartásával.
         \par
@@ -114,60 +124,75 @@
                 \caption{sip-modul}
                 \label{fig:sip}
             \end{figure}
-
+%
             \begin{figure}
                 \centering
                 \includegraphics[width=0.6\textwidth]{kep/szerkesztett/anritsu.jpg}
                 \caption{anritsu}
                 \label{fig:anritsu}
             \end{figure}
-
+%
             \begin{figure}
                 \centering
-                \includegraphics[width=0.33\textwidth]{kep/szerkesztett/botantenna_XY.jpg}
-                \includegraphics[width=0.33\textwidth]{kep/szerkesztett/botantenna_XZ.jpg}
-                \includegraphics[width=0.33\textwidth]{kep/szerkesztett/botantenna_YZ.jpg}
-                \caption{botantenna}
+                \begin{subfigure}{0.3\textwidth}
+                    \includegraphics[width=\textwidth]{kep/szerkesztett/botantenna_XY.jpg}
+                    \caption{XY sík}
+                \end{subfigure}
+                \begin{subfigure}{0.3\textwidth}
+                    \includegraphics[width=\textwidth]{kep/szerkesztett/botantenna_XZ.jpg}
+                    \caption{XZ sík}
+                \end{subfigure}
+                \begin{subfigure}{0.3\textwidth}
+                    \includegraphics[width=\textwidth]{kep/szerkesztett/botantenna_YZ.jpg}
+                    \caption{YZ sík}
+                \end{subfigure}
+                \caption{Az iránykarakterisztika három metszetének mérése az antennaszobában.}
                 \label{fig:botantenna}
             \end{figure}
-
+%
             \begin{figure}
                 \centering
                 \includegraphics[width=0.6\textwidth]{kep/szerkesztett/fsv.jpg}
                 \caption{fsv}
                 \label{fig:fsv}
             \end{figure}
-
+%
             \begin{figure}
                 \centering
-                \includegraphics[width=0.6\textwidth]{kep/szerkesztett/pigtail1.jpg}
-                \includegraphics[width=0.6\textwidth]{kep/szerkesztett/pigtail2.jpg}
+                \includegraphics[width=0.48\textwidth]{kep/szerkesztett/pigtail1.jpg}
+                \includegraphics[width=0.48\textwidth]{kep/szerkesztett/pigtail2.jpg}
                 \caption{pigtailek}
                 \label{fig:pigtail}
             \end{figure}
-
+%
             \begin{figure}
                 \centering
                 \includegraphics[width=0.6\textwidth]{kep/szerkesztett/vna.jpg}
                 \caption{VNA}
                 \label{fig:vna}
             \end{figure}
-
+%
             \begin{figure}
                 \centering
                 \includegraphics[width=0.6\textwidth]{kep/szerkesztett/sol-470-conducted.png}
                 \caption{470 MHz sol conducted}
                 \label{fig:sol-470-conducted.png}
             \end{figure}
-
+%
             \begin{figure}
                 \centering
                 \includegraphics[width=0.6\textwidth]{kep/szerkesztett/sol-868-conducted.png}
                 \caption{868 MHz sol conducted}
                 \label{fig:sol-868-conducted.png}
             \end{figure}
-
-
+%
+            \begin{figure}
+                \centering
+                \includegraphics[width=0.6\textwidth]{kep/szerkesztett/antennamatrix.png}
+                \caption{Beltéri iránymérő antennamátrix.}
+                \label{fig:antennamatrix}
+            \end{figure}
+%
         \subsection{Sugárzott mérés}
         \subsection{Modulációs faktor}
     \section{NyHL tervezés}

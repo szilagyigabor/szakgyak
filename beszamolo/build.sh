@@ -1,22 +1,30 @@
 #!/bin/sh
 cim="beszamolo"
-
+bib=0
 echo "Fordítás pdflatex 1"
 echo "Fordítás pdflatex 1\n\n\n" > output.txt
 pdflatex -interaction=nonstopmode -halt-on-error $cim.tex >> output.txt
-echo "Fordítás bibtex"
-echo "\n\n\nFordítás bibtex\n\n\n" >> output.txt
-bibtex $cim >> output.txt
-echo "Fordítás pdflatex 2"
-echo "\n\n\nFordítás pdflatex 2\n\n\n" >> output.txt
-pdflatex -interaction=nonstopmode -halt-on-error $cim.tex >> output.txt
-echo "Fordítás pdflatex 3"
-echo "\n\n\nFordítás pdflatex 3\n\n\n" >> output.txt
-pdflatex -interaction=nonstopmode -halt-on-error $cim.tex >> output.txt
-
-if [ -e $cim.aux ]; then
-	rm $cim.aux
+if [ $? = 0 ]; then
+    if [ $bib != 0 ]; then
+        echo "Fordítás bibtex"
+        echo "\n\n\nFordítás bibtex\n\n\n" >> output.txt
+        bibtex $cim >> output.txt
+        echo "Fordítás pdflatex 2"
+        echo "\n\n\nFordítás pdflatex 2\n\n\n" >> output.txt
+        pdflatex -interaction=nonstopmode -halt-on-error $cim.tex >> output.txt
+    fi
+    echo "Fordítás pdflatex 3"
+    echo "\n\n\nFordítás pdflatex 3\n\n\n" >> output.txt
+    pdflatex -interaction=nonstopmode -halt-on-error $cim.tex >> output.txt
+else
+    echo "Error:\n\n"
+    cat output.txt
 fi
+
+
+#if [ -e $cim.aux ]; then
+#	rm $cim.aux
+#fi
 if [ -e $cim.bbl ]; then
 	rm $cim.bbl
 fi
