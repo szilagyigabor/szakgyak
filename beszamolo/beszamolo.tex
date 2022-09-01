@@ -84,6 +84,8 @@
 \huge{\textbf{MSc Szakmai Gyakorlat Beszámoló}} \\
 \vspace{3cm}}
 
+\parskip=10pt
+\parindent=0pt
 \author{Szilágyi Gábor \\\vspace{2cm}\\ Konzulens: Bódi Tamás}
 \date{Budapest, \today}
   
@@ -91,7 +93,7 @@
 \begin{document}
     \maketitle
     \section{Bevezetés}
-    A Silicon Laboratories Hungary kft-nél 2021 júliusában kezdtem el dolgozni gyakornokként és az elmúlt évben sokat tanultam a munkám során. Az MSc-s szakmai gyakorlat ledokumentált időtartama alatt már komolyabb feladataim voltak, mint a gyakornokoskodásom elején. Ezeket az elvégzett feladatokat, a használt eszközöket és keretrendszert mutatom be ebben a beszámolóban. A cégen belül a ,,Hardware Tools'' csapatban dolgoztam, ez a csapat elsősorban a rádiós demonstrációs áramkörök tervezéséért és az ezekhez kapcsolódó mérésekért felelős.
+    A Silicon Laboratories Hungary kft-nél 2021 júliusában kezdtem el dolgozni gyakornokként és egészen 2022 augusztusáig maradtam a cégnél egy kisebb megszakítással télen. Az elmúlt évben sokat tanultam a munkám során. Az MSc-s szakmai gyakorlat ledokumentált időtartama alatt már komolyabb feladataim voltak, mint a gyakornokoskodásom elején. Ezeket az elvégzett feladatokat, a használt eszközöket és keretrendszert mutatom be ebben a beszámolóban. A cégen belül a ,,Hardware Tools'' csapatban dolgoztam, ez a csapat elsősorban a rádiós demonstrációs áramkörök tervezéséért és az ezekhez kapcsolódó mérésekért felelős.
     \subsection{A cégről}
         A fent említett cég a Silicon Laboratories (SiLabs) austini központú (USA, Texas), multinacionális vállalat budapesti alvállalata. A cég rendelkezik irodákkal Austinon és Budaesten kívül többek között Hyderabadban (India), Osloban (Norvégia) és Rennes-ben (Franciaország). A világ több sarkában való működés ellenére összesen körülbelül 2000-en dolgoznak a cégnél, a budapesti iroda jelenlegi létszáma 200 körüli, ami a cégen belül az egyik legnépesebb helyszínnek számít. Az egyes helyszínek valamelyest specializálódtak a feladatkörükben, például Austinban történik maguknak a szilícium chipeknek a fejlesztése, Budapesten hardver validációval és szoftverfejlesztéssel foglalkoznak nagy számban, norvégiában pedig a demonstrációs áramkörök gyártása történik.
         \par
@@ -108,8 +110,8 @@
                 \label{fig:wstkmighty}
             \end{figure}
 %
-    \section{RF Mérés}
-        A szakmai gaykorlatom során elsősorban a demonstrációs áramkörök rádiófrekvenciás részének fejlesztésével, tesztelésével foglalkoztam. A kérdéses áramköröknél RF szempontból a legtöbb fejfájást az antenna és a végfokerősítő közötti illesztőhálózat okozza. Ez a hálózat azokon az áramkörökön, amikkel én találkoztam, legtöbbször egy 5-elemű szűrő- és illesztőfokozat, ami diszkrét tekercsekből és kondenzátorokból van felépítve az NyHL-en. Egy másik alkatrész, amit elsősorban szub-\SI{}{GHz}-en használnak a cégnél, az integrált balun használata, ami \aref{fig:wstkmighty}. ábrán lehet kivehető az U.FL csatlakozótól jobbra a ,,Mighty Gecko'' feliratú NyHL-en, mint barna, hatlábú alkatrész. Az illesztőhálózatnak sokféle változata van használatban a különböző áramkörökön, mert több szempont határozza meg együttesen az ideális tulajdonságokat.
+    \section{Rádiófrekvenciás Mérés}
+        A szakmai gaykorlatom során elsősorban a demonstrációs áramkörök rádiófrekvenciás részének fejlesztésével, tesztelésével foglalkoztam. A kérdéses áramköröknél rádiófrekvenciás (RF) szempontból a legtöbb fejfájást az antenna és a végfokerősítő közötti illesztőhálózat okozza. Ez a hálózat azokon az áramkörökön, amikkel én találkoztam, legtöbbször egy 5-elemű szűrő- és illesztőfokozat, ami diszkrét tekercsekből és kondenzátorokból van felépítve az NyHL-en. Egy másik alkatrész, amit elsősorban szub-\SI{}{GHz}-en használnak a cégnél, az integrált balun használata, ami \aref{fig:wstkmighty}. ábrán lehet kivehető az U.FL csatlakozótól jobbra a ,,Mighty Gecko'' feliratú NyHL-en, mint barna, hatlábú alkatrész. Az illesztőhálózatnak sokféle változata van használatban a különböző áramkörökön, mert több szempont határozza meg együttesen az ideális tulajdonságokat.
         \par
         Az első és legnyilvánvalóbb ilyen szempont a működési frekvencia. Értelemszerűen ha más frekvencián működik a rádió, akkor más elemértékekkel lehet hasonló szűrő és impedanciaillesztő hatást elérni. A gyakran előforduló működési frekvenciák: \SI{2,4}{GHz}, \SI{915}{MHz}, \SI{868}{MHz} és \SI{470}{MHz}, de előfordulhatnak még olyanok, amikkel csak én nem találkoztam a munkám során, de tervez ilyen frekvenciákra is eszközöket a cég. Ezek elsősorban \SI{915}{MHz} vagy \SI{470}{MHz} környékén lehetnek, amelyik tartományokban tudtommal a világ különböző részein más-más frekvenciasáv van kijelölve ISM (Industrial Scientific Medical) használatra, amilyen sávokban ezek az eszközök működhetnek. Az elemértékek meghatározásán kívül még egy érdekes hatása van a működési frekvenciának az áramkör tervezésénél. A \SI{2,4}{GHz}-es és szub-\SI{}{GHz}-es áramköröknél jelentős különbség van abban, hogy mennyire érzékeny az illesztőhálózat viselkedése a struktúra geometriájára. Nem meglepő módon nagyobb frekvencián, ahol a működési hullámhossz, de főleg a felharmonikus hullámhosszak közelebb vannak az RF áramköri rész méreteihez, a viselkedést komolyan befolyásolja a geometria. Ezzel szemben nagyobb hullámhosszaknál ez a hatás lecsökken és sokkal szabadabban lehet átrendezgetni az NyHL-en az alkatrészeket mindenféle helytakarékossági és egyéb szempont alapján, persze a topológia megtartásával.
         \par
@@ -117,20 +119,43 @@
         \par
         Még egy fontos szempontcsoportot alkotnak a hordozó paraméterei. Ilyenek például a szubsztrát dielektromos állandója és a rézrétegek közötti távolság. Mindkettő a parazita hatások kialakulásában játszik fontos szerepet, emiatt előfordul, hogy csak a rézrétegek közötti hézag változtatása miatt (pl. áttérés 4 rétegű hordozóról 2 rétegűre) teljesen újra kell tervezni az illesztőhálózatot. A fenti példában a nagyobb rétegtávolság a szomszédos rézrétegek között csökkenti a parazita kapacitást, ugyanakkor megnöveli a szomszédos rétegek között kialakuló áramhurok hosszát, így növelve annak az áramútnak parazita induktivitását. Hasonló jelenségek miatt ilyen helyzetben könnyen lehet, hogy még az illesztőhálózat topológiáján vagy elemszámán is változtatni kell, hogy megfelelően működjön.
         \subsection{Vezetett mérés}
-            dolgok
+            Az általam rendszeresen végzett RF mérések közül a vezetett mérés az egyszerűbb. Ez gyakorlatilag abban áll, hogy a radio board RF kimenetét, ami egy U.FL vagy SMA csatlakozó, egy spektrumanalizátorra kapcsolom és a kiadott jelet elemzem. Ilyen méréseknél általában egy egyszerű szinuszos jelet generáltatok a radio boarddal és az alapharmonikus, valamint a felharmonikusok teljesítményszintjeit vizsgálom. Ilyen célra legtöbbször az Anritsu MS2692A típusú spektrumanalizátort használtam, ami \aref{fig:anritsu}. ábrán látható, mert ennek a műszernek elég alacsony a zajszintje. Két ilyen mérési eredmény látható \aref{fig:sol-conducted}. ábrán, ahol megfigyelhető, hogy a más frekvenciára készült két testvér radio board közül (mindkettő rádiós chipje a ,,Sol'' cégen belül használt kódnév alatt) a \SI{470}{MHz}-esnek kisebbek a felharmonikus teljesítményei. Tudtommal alacsonyabb frekvencián szigorúbbak a követelmények a felharmonikus teljesítményekkel szemben, mégis az a tapasztalat, hogy alacsonyabb frekvenciájú board-okon kisebb problémát okoznak a felharmonikusok, nagyobb szokott lenni a tartalék a ténylegesen kimért teljesítményszintek és az EMC szabványban meghatározottak között.
+            \par
+            Vezetett mérést elsősorban két helyzetben végeztem. Egyrészt skkor, amikor már egy más téren letesztelt radio boardról el kellett dönteni, hogy megfelel-e a szabványnak a vezetett teljesítményszintek alapján. Ugyan rádiókról van szó, így elvileg elég lehetne kizárólag csak a sugárzott teljesítményszinteket vizsgálni, de szükség van a vezetetten kicsatolt kimeneti jel minőségbiztosítására is, hogy megfeleljen a szabványnak. A második helyzet, amikor vezetett méréseket végeztem, az volt, amikor egy radio board diszkrét alkatrészekből kialakított illesztőhálózatát kellett próbálkozás útján tökéletesíteni, majd minden változtatás után dokumentálni az adódó teljesítményspektrumot. A \SI{2.4}{GHz}-nél fellépő jelentős parazitahatások miatt gyakorlatilag lehetetlen lenne jó áramköri modellt alkotni a kérdéses illesztőhálózathoz, a 3D-s elektromágneses szimuláció előkészítése pedig túl hosszadalmas lenne, így maradt a próbálkozásos és méregetős módszer. Szub-\SI{}{GHz}-en nem okoztak ilyen gondot az illesztőhálózatok, ilyen board-okon elegendő volt a régen kikísérletezett, jól bevált illesztőhálózatok használata, főleg, hogy amint fentebb említettem, szub-\SI{}{GHz}-en szabadabban lehet a geometriát változtatni, így sokféle elrendezésnél használható marad a megegyező topológiájú hálózat.
             \begin{figure}
+                \centering
+                \includegraphics[width=0.6\textwidth]{kep/szerkesztett/anritsu.jpg}
+                \caption{Anritsu MS2692A}
+                \label{fig:anritsu}
+            \end{figure}
+%
+            \begin{figure}
+                \centering
+                \begin{subfigure}{0.48\textwidth}
+                    \includegraphics[width=\textwidth]{kep/szerkesztett/sol-470-conducted.png}
+                    \caption{\SI{470}{MHz}}
+                \end{subfigure}
+                \begin{subfigure}{0.48\textwidth}
+                    \includegraphics[width=\textwidth]{kep/szerkesztett/sol-868-conducted.png}
+                    \caption{\SI{868}{MHz}}
+                \end{subfigure}
+                \caption{470 és \SI{868}{MHz}-es Sol radio board-ok kimeneti spektruma.}
+                \label{fig:sol-conducted}
+            \end{figure}
+%
+        \subsection{Sugárzott mérés}
+            a
+        \subsection{Modulációs faktor}
+    \section{NyHL tervezés}
+        \subsection{Kapcsolási rajz}
+        \subsection{Nyomtatott huzalozási rajz}
+\begin{figure}
                 \centering
                 \includegraphics[width=0.6\textwidth]{kep/szerkesztett/sip-modul.jpg}
                 \caption{sip-modul}
                 \label{fig:sip}
             \end{figure}
 %
-            \begin{figure}
-                \centering
-                \includegraphics[width=0.6\textwidth]{kep/szerkesztett/anritsu.jpg}
-                \caption{anritsu}
-                \label{fig:anritsu}
-            \end{figure}
 %
             \begin{figure}
                 \centering
@@ -172,19 +197,6 @@
                 \label{fig:vna}
             \end{figure}
 %
-            \begin{figure}
-                \centering
-                \includegraphics[width=0.6\textwidth]{kep/szerkesztett/sol-470-conducted.png}
-                \caption{470 MHz sol conducted}
-                \label{fig:sol-470-conducted.png}
-            \end{figure}
-%
-            \begin{figure}
-                \centering
-                \includegraphics[width=0.6\textwidth]{kep/szerkesztett/sol-868-conducted.png}
-                \caption{868 MHz sol conducted}
-                \label{fig:sol-868-conducted.png}
-            \end{figure}
 %
             \begin{figure}
                 \centering
@@ -193,9 +205,4 @@
                 \label{fig:antennamatrix}
             \end{figure}
 %
-        \subsection{Sugárzott mérés}
-        \subsection{Modulációs faktor}
-    \section{NyHL tervezés}
-        \subsection{Kapcsolási rajz}
-        \subsection{Nyomtatott huzalozási rajz}
 \end{document}
