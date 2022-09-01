@@ -22,9 +22,9 @@ else
 fi
 
 
-#if [ -e $cim.aux ]; then
-#	rm $cim.aux
-#fi
+if [ -e $cim.aux ]; then
+	rm $cim.aux
+fi
 if [ -e $cim.bbl ]; then
 	rm $cim.bbl
 fi

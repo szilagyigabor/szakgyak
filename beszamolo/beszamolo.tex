@@ -13,13 +13,13 @@
 \usepackage{enumerate}
 %\usepackage{psfrag}
 \usepackage[left=20mm,right=20mm,top=20mm,bottom=25mm]{geometry}
-% \usepackage[left=10mm,right=10mm,top=10mm,bottom=15mm]{geometry} %landscape
+%\usepackage[left=10mm,right=10mm,top=10mm,bottom=15mm]{geometry} %landscape
 \usepackage[hyphenbreaks]{breakurl}
 \usepackage[hyphens]{url}
 %\usepackage{multirow}
 %\usepackage{booktabs}
 \usepackage{hyperref}
-\usepackage{listings}
+%\usepackage{listings}
 %\usepackage{csquotes}
 \usepackage{siunitx}
 \usepackage{xcolor}
@@ -32,46 +32,9 @@
 	urlcolor={blue!80!black}
 }
 
-% \newcommand{\zi}{z^{-1}}
-% \newcommand{\zii}{z^{-2}}
-% \newcommand{\ejth}{e^{-j\vartheta}}
-% \newcommand{\ejtth}{e^{-j2\vartheta}}
-% \newcommand{\Ohm}{\Omega}
-% \newcommand{\jw}{j\omega}
-% \newcommand{\jwn}{(\jw)^2}
-%\newcommand{\cpv}[1]{\overline{#1}}
-%\newcommand{\Ukcs}{\cpv{U}}
-%\newcommand{\Icpv}{\cpv{I}}
-%\newcommand{\Ucpv}{\cpv{U}}
-%\usetikzlibrary{arrows.meta}
+\pagestyle{plain} 
 
-%\pagestyle{plain} 
 
-\definecolor{codegreen}{rgb}{0,0.6,0}
-\definecolor{codegray}{rgb}{0.5,0.5,0.5}
-\definecolor{codepurple}{rgb}{0.58,0,0.82}
-\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
-
-\lstdefinestyle{mystyle}{
-    backgroundcolor=\color{backcolour},   
-    commentstyle=\color{codegreen},
-    keywordstyle=\color{magenta},
-    numberstyle=\tiny\color{codegray},
-    stringstyle=\color{codepurple},
-    basicstyle=\ttfamily\scriptsize,
-    breakatwhitespace=false,         
-    breaklines=true,                 
-    captionpos=b,                    
-    keepspaces=true,                 
-    numbers=left,                    
-    numbersep=5pt,                  
-    showspaces=false,                
-    showstringspaces=false,
-    showtabs=false,                  
-    tabsize=2
-}
-
-\lstset{style=mystyle}
 
 \title{
 \centering
@@ -84,8 +47,9 @@
 \huge{\textbf{MSc Szakmai Gyakorlat Beszámoló}} \\
 \vspace{3cm}}
 
-\parskip=10pt
-\parindent=0pt
+%\parskip=10pt
+%\parindent=0pt
+
 \author{Szilágyi Gábor \\\vspace{2cm}\\ Konzulens: Bódi Tamás}
 \date{Budapest, \today}
   
@@ -121,7 +85,7 @@
         \subsection{Vezetett mérés}
             Az általam rendszeresen végzett RF mérések közül a vezetett mérés az egyszerűbb. Ez gyakorlatilag abban áll, hogy a radio board RF kimenetét, ami egy U.FL vagy SMA csatlakozó, egy spektrumanalizátorra kapcsolom és a kiadott jelet elemzem. Ilyen méréseknél általában egy egyszerű szinuszos jelet generáltatok a radio boarddal és az alapharmonikus, valamint a felharmonikusok teljesítményszintjeit vizsgálom. Ilyen célra legtöbbször az Anritsu MS2692A típusú spektrumanalizátort használtam, ami \aref{fig:anritsu}. ábrán látható, mert ennek a műszernek elég alacsony a zajszintje. Két ilyen mérési eredmény látható \aref{fig:sol-conducted}. ábrán, ahol megfigyelhető, hogy a más frekvenciára készült két testvér radio board közül (mindkettő rádiós chipje a ,,Sol'' cégen belül használt kódnév alatt) a \SI{470}{MHz}-esnek kisebbek a felharmonikus teljesítményei. Tudtommal alacsonyabb frekvencián szigorúbbak a követelmények a felharmonikus teljesítményekkel szemben, mégis az a tapasztalat, hogy alacsonyabb frekvenciájú board-okon kisebb problémát okoznak a felharmonikusok, nagyobb szokott lenni a tartalék a ténylegesen kimért teljesítményszintek és az EMC szabványban meghatározottak között.
             \par
-            Vezetett mérést elsősorban két helyzetben végeztem. Egyrészt skkor, amikor már egy más téren letesztelt radio boardról el kellett dönteni, hogy megfelel-e a szabványnak a vezetett teljesítményszintek alapján. Ugyan rádiókról van szó, így elvileg elég lehetne kizárólag csak a sugárzott teljesítményszinteket vizsgálni, de szükség van a vezetetten kicsatolt kimeneti jel minőségbiztosítására is, hogy megfeleljen a szabványnak. A második helyzet, amikor vezetett méréseket végeztem, az volt, amikor egy radio board diszkrét alkatrészekből kialakított illesztőhálózatát kellett próbálkozás útján tökéletesíteni, majd minden változtatás után dokumentálni az adódó teljesítményspektrumot. A \SI{2.4}{GHz}-nél fellépő jelentős parazitahatások miatt gyakorlatilag lehetetlen lenne jó áramköri modellt alkotni a kérdéses illesztőhálózathoz, a 3D-s elektromágneses szimuláció előkészítése pedig túl hosszadalmas lenne, így maradt a próbálkozásos és méregetős módszer. Szub-\SI{}{GHz}-en nem okoztak ilyen gondot az illesztőhálózatok, ilyen board-okon elegendő volt a régen kikísérletezett, jól bevált illesztőhálózatok használata, főleg, hogy amint fentebb említettem, szub-\SI{}{GHz}-en szabadabban lehet a geometriát változtatni, így sokféle elrendezésnél használható marad a megegyező topológiájú hálózat.
+%
             \begin{figure}
                 \centering
                 \includegraphics[width=0.6\textwidth]{kep/szerkesztett/anritsu.jpg}
@@ -129,27 +93,43 @@
                 \label{fig:anritsu}
             \end{figure}
 %
+            Vezetett mérést elsősorban két helyzetben végeztem. Egyrészt skkor, amikor már egy más téren letesztelt radio boardról el kellett dönteni, hogy megfelel-e a szabványnak a vezetett teljesítményszintek alapján. Ugyan rádiókról van szó, így elvileg elég lehetne kizárólag csak a sugárzott teljesítményszinteket vizsgálni, de szükség van a vezetetten kicsatolt kimeneti jel minőségbiztosítására is, hogy megfeleljen a szabványnak. A második helyzet, amikor vezetett méréseket végeztem, az volt, amikor egy radio board diszkrét alkatrészekből kialakított illesztőhálózatát kellett próbálkozás útján tökéletesíteni, majd minden változtatás után dokumentálni az adódó teljesítményspektrumot. A \SI{2.4}{GHz}-nél fellépő jelentős parazitahatások miatt gyakorlatilag lehetetlen lenne jó áramköri modellt alkotni a kérdéses illesztőhálózathoz, a 3D-s elektromágneses szimuláció előkészítése pedig túl hosszadalmas lenne, így maradt a próbálkozásos és méregetős módszer. Szub-\SI{}{GHz}-en nem okoztak ilyen gondot az illesztőhálózatok, ilyen board-okon elegendő volt a régen kikísérletezett, jól bevált illesztőhálózatok használata, főleg, hogy amint fentebb említettem, szub-\SI{}{GHz}-en szabadabban lehet a geometriát változtatni, így sokféle elrendezésnél használható marad a megegyező topológiájú hálózat.
             \begin{figure}
                 \centering
                 \begin{subfigure}{0.48\textwidth}
-                    \includegraphics[width=\textwidth]{kep/szerkesztett/sol-470-conducted.png}
-                    \caption{\SI{470}{MHz}}
-                \end{subfigure}
-                \begin{subfigure}{0.48\textwidth}
                     \includegraphics[width=\textwidth]{kep/szerkesztett/sol-868-conducted.png}
                     \caption{\SI{868}{MHz}}
+                \end{subfigure}
+                \begin{subfigure}{0.48\textwidth}
+                    \includegraphics[width=\textwidth]{kep/szerkesztett/sol-470-conducted.png}
+                    \caption{\SI{470}{MHz}}
                 \end{subfigure}
                 \caption{470 és \SI{868}{MHz}-es Sol radio board-ok kimeneti spektruma.}
                 \label{fig:sol-conducted}
             \end{figure}
 %
         \subsection{Sugárzott mérés}
-            a
+            A vezetett mérés mellett a másik módszer, ahogy egy radio board teljesítőképességét vizsgáltuk a sugárzott mérés, amihez a budapesti irodában lévő antennaszobát használtuk. Maga az antennaszoba egy RF szempontból külső zajoktól elszigetelt és belül a felületeket borító tüskékkel reflexiócsökkentett helyiség. Bent található egy mérőantenna, kicsit pontosabban egy bordás tölcsérantenna, aminek ismert a nyereség-frekvencia karakterisztikája körülbelül \SI{0,3}{GHz}-től \SI{15}{GHz}-ig. Az antennától \SI{3}{m}-re található egy hungarocelltorony léptetőmotorral az alján, ami forgóasztalként funkcionál. Erre az asztalra tesszük méréshez a vizsgálandó rádióadót, vagyis a DUT-ot (Device Under Test) és az antennára csatlakoztatott spektrumanalizátor segítségével mérjük a különböző irányokban és frekvenciákon kisugárzott teljesítményt. Az antennaszoba két vége \aref{fig:antennaszoba}. ábrán látható.
+            \begin{figure}
+                \centering
+                \begin{subfigure}{0.4\textwidth}
+                    \includegraphics[width=\textwidth]{kep/szerkesztett/antennaszoba-antenna.jpg}
+                    \caption{Mérőantenna}
+                \end{subfigure}
+                \begin{subfigure}{0.4\textwidth}
+                    \includegraphics[width=\textwidth]{kep/szerkesztett/antennaszoba-asztal.jpg}
+                    \caption{Forgóasztal}
+                \end{subfigure}
+                \caption{Berendezés az antennaszobában.}
+                \label{fig:antennaszoba}
+            \end{figure}
+            \par
+            Az antennaszobának van egy előszobája, ami már a leárnyékolt helyiségen kívül van, itt található a sugárzott mérésekhez dedikált Rohde \& Schwarz FSQ típusú spektrumanalizátor, a szobában található léptetőmotorok vezérlője és az egész mérést irányító számítógép, ami az előszoba többi eszközére van csatlakoztatva. Az antennaszobában háromféle mérést lehet végezni, ezek közül én kettővel foglalkoztam, de a harmadik mérés tárgyához, egy speciális radio boardhoz is volt valamennyi közöm.
         \subsection{Modulációs faktor}
     \section{NyHL tervezés}
         \subsection{Kapcsolási rajz}
         \subsection{Nyomtatott huzalozási rajz}
-\begin{figure}
+            \begin{figure}
                 \centering
                 \includegraphics[width=0.6\textwidth]{kep/szerkesztett/sip-modul.jpg}
                 \caption{sip-modul}
