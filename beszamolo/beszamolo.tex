@@ -21,7 +21,7 @@
 \usepackage{hyperref}
 %\usepackage{listings}
 %\usepackage{csquotes}
-\usepackage{siunitx}
+\usepackage[range-phrase=--, range-units=single]{siunitx}
 \usepackage{xcolor}
 %\usepackage[a-3u]{pdfx}
 
@@ -34,7 +34,7 @@
 
 \pagestyle{plain} 
 
-
+\listfiles % a package-ek kilistázása a logba
 
 \title{
 \centering
@@ -152,7 +152,8 @@
         \subsection{Modulációs faktor}
             Az EMC szabványok szerint a valós alkalmazás körülményei között kell az eszköznek megfelelnie a felharmonikusok teljesítményszintjeivel szemben támasztott követelményeknek. A laborban a méréseket viszont CW (Continous Wave), vagyis modulálatlan vivő adása mellett teszteljük. Azért van erre szükség, mert modulált jelnél a felharmonikus frekvenciák körül szétkenődött jel spektrális teljesítménysűrűsége olyan kicsi, hogy a zajszint alá kerül, emiatt nem lehet effektíven megmérni. Megjegyzem, hogy gyakorlatilag a CW jel modulációja nem hat a kimeneti jel összteljesítményére, tehát a moduláció az adott, CW esetben egyszerűen mérhető jelteljesítményt nem növeli vagy csökkenti, csak nagyobb sávszélességen osztja el. A boardjainkat érintő szabvány kiköti, hogy a megfelelőség eldöntéséhez használt spektrumanalizátoron \SI{1}{MHz}-es RBW (Resolution BandWidth) legyen beállítva, ami egyszerre csak közelítőleg egy \SI{1}{MHz} széles frekvenciasávba eső összteljesítmény mérését jelenti. A modulálatlan jel sávszélessége nagyon kicsi, habár nem 0, mivel elég kicsi a rádió oszcillátorának fáziszaja. Egy konzervatív felső becslésként vegyük ezt a sávszélességet \SI{1}{kHz}-nek, a konkrét jellemző értékekre nem emlékszem. Az alapharmonikuson ülő jelkomponens sávszélességének $n$-szerese az $n$-edik felharmonikus körül ülő komponens sávszélessége. Eszerint még a sokadik felharmonikus frekvencia körül is csak nagyon kis sávszélességet foglalna el a jel, például a 20. harmonikus körül is csak \SI{\pm10}{kHz}-et, ami még bőven teljesen bele esik a megadott \SI{1}{MHz}-es sávba. Ha a fentiekkel szemben nem CW jellel mérünk, hanem valamilyen szélesebb frekvencialöketű modulált jellel, akkor könnyen elképzelhető, hogy már a 3-4. harmonikus frekvencia környékén is a keltett zavaró jelkomponens sávszélessége lényegesen szélesebb, akár többszörösen is, mint az emlegetett \SI{1}{MHz}-es határ. Emiatt akármelyik konkrét frekvencia környezetében végezzük is a mérést, a mérésnél használt RBW-t meghatározó szűrő csak az adott harmonikus környékén szétszórt jelteljesítménynek mindig csak egy részét engedi át, ez pedig csökkenti a modulált mérésnél kapott harmonikus teljesítményszinteket a CW mérés eredményeihez képest. A két mérési eredmény eltérése a modulációs faktor (lineáris skálán a két összetartozó teljesítményszint hányadosa; logaritmikus skálán, például \SI{}{dBm}-ben megadott teljesítmények számértékének különbsége \SI{}{dB}-ben).
             \par
-            Ez alapvetően egy előnyös dolog, de azért hogy teljesen kihasználhassuk a jelenségben rejlő lehetőségeket, kicsit mérni és számolni kell. A fentiek miatt a CW (modulálatlan) jellel végzett mérés a lehető legszigorúbb a moduláció szempontjából. Tehát ha egy rádió CW esetben átmegy a teszten, akkor biztosak lehetünk benne, hogy modulált esetben is átmenne, mert az eredmény nem lehetne rosszabb, legfeljebb hasonló kislöketű modulációk esetén. Akkor lesz problémásabb a helyzet, ha a rádió megbukik a teszten, de nem sokkal, például csak \SIrange{2}{3}{dB}-vel. % elvileg működik a \qty[]{}{} és a \qtyrange[]{}{}{} is, de nemtom. utánanézni.
+            Ez alapvetően egy előnyös dolog, de azért hogy teljesen kihasználhassuk a jelenségben rejlő lehetőségeket, kicsit mérni és számolni kell. A fentiek miatt a CW (modulálatlan) jellel végzett mérés a lehető legszigorúbb a moduláció szempontjából. Tehát ha egy rádió CW esetben átmegy a teszten, akkor biztosak lehetünk benne, hogy modulált esetben is átmenne, mert az eredmény nem lehetne rosszabb, legfeljebb hasonló kislöketű modulációk esetén. Akkor lesz problémásabb a helyzet, ha a rádió megbukik a teszten, de nem sokkal, például csak 
+	    \qtyrange{2}{3}{dB}-vel.
     \section{NyHL tervezés}
         \subsection{Kapcsolási rajz}
         \subsection{Nyomtatott huzalozási rajz}
