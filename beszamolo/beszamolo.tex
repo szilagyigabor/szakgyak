@@ -10,7 +10,7 @@
 \usepackage{graphicx}
 \usepackage[hang]{caption}
 \usepackage{subcaption}
-\usepackage{enumerate}
+%\usepackage{enumerate}
 %\usepackage{psfrag}
 \usepackage[left=20mm,right=20mm,top=20mm,bottom=25mm]{geometry}
 %\usepackage[left=10mm,right=10mm,top=10mm,bottom=15mm]{geometry} %landscape
@@ -166,7 +166,7 @@
    \section{NyHL tervezés}
         A cég által forgalmazott rádiós IC-ket használó referencia-áramkörök, leginkább az ezeket hordozó nyomtatott huzalozási lemezek tervezése a Hardware Tools csapat feladata, így ebben is részt vettem. Az egyik folyó projekt egy olyan készülékpáros tervezése volt a cégnél, ami rádiós komunikáció alapján képes nagy pontossággal távolságo mérni két kisméretű résztvevő eszköz között. A projektet ,,HADM'' (vagyis ,,High Accuracy Distance Metering'') néven emlegettük. A két résztvevő készülék nem egyforma, az egyik egy egyszerű adóvevő, ez a ,,tag'', ami körülbelül akkora, mint egy kézi rádiós kaputávirányító, a másik pedig egy komolyabb, többantennás mérőműszer. Az utóbbi végeredményben jelzést küld a tag-nek, ami válaszol, majd a válaszjel érkezési ideje és egyéb paraméterei alapján lehet kiszámítani a távolságot a két készülék között.
         \par
-        A HADM projektbe annyival segítettem be, hogy a tag layoutját
+        A HADM projektbe annyival segítettem be, hogy a tag layoutjának megtervezésébe segítettem be. Ehhez az Altium Designer szoftvercsomagot használtam, amit a cégnél, de elsősorban a Hardware Tools csapatban előszeretettel használnak. Az Altium Designer az NyHL tervezés minden lépését magába foglalja erősen integrált módon, a kapcsolási rajz tervezésétől a layout megszerkesztésén át a gyártási fájlok generálásáig. Ilyen szempontból hasonlít a KiCAD-hez, ami gyakorlatilag egy ingyenes és nyílt forráskódú megfelelője az Altium Designer-nek, persze sok funkció hiányzik belőle, amit az Altium Designer nyújt, lévén az utóbbi egy meglehetősen borsos árú, professzionális programcsomag. Azzal, hogy előzőleg már saját szórakozásomra terveztem NyHL-t KiCAD-ben és a cégnél egy professzionálisabb program használatával is kipróbálhattam magam
         \subsection{Kapcsolási rajz}
         \subsection{Nyomtatott huzalozási rajz}
             \begin{figure}
