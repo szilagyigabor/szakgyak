@@ -40,6 +40,12 @@ fi
 if [ -e $cim.toc ]; then
 	rm $cim.toc
 fi
+if [ -e $cim.xmpdata ]; then
+	rm $cim.xmpdata
+fi
+if [ -e pdfa.xmpi ]; then
+	rm pdfa.xmpi
+fi
 if [ -e tartalom/*.aux ]; then
 	rm tartalom/*.aux
 fi

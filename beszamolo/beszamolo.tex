@@ -1,5 +1,13 @@
+% pdf/a 
+\begin{filecontents*}[overwrite]{\jobname.xmpdata}
+    \Title{MSc szakmai gyakorlat beszámoló}
+    \Author{Szilágyi Gábor}
+    \Language{hu-HU}
+    \Subject{szakmai gyakorlat}
+    \Keywords{SiLabs, RF mérés, Altium, EMC}
+    \Publisher{Szilágyi Gábor}
+\end{filecontents*}
 \documentclass[a4paper,12pt,titlepage]{article}
-
 \usepackage{ucs}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -23,8 +31,7 @@
 %\usepackage{csquotes}
 \usepackage[range-phrase=--, range-units=single]{siunitx}
 \usepackage{xcolor}
-%\usepackage[a-3u]{pdfx}
-
+\usepackage[a-3u]{pdfx}
 \hypersetup{
 	colorlinks,
 	linkcolor={red!50!black},
@@ -44,7 +51,7 @@
 \textbf{Villamosmérnöki és Informatikai Kar}\\
 \textbf{Szélessávú Hírközlés és Villamosságtan Tanszék}}\\
 \vspace{5cm}
-\huge{\textbf{MSc Szakmai Gyakorlat Beszámoló}} \\
+\huge{\textbf{MSc Szakmai gyakorlat beszámoló}} \\
 \vspace{3cm}}
 
 %\parskip=10pt
@@ -74,7 +81,7 @@
                 \label{fig:wstkmighty}
             \end{figure}
 %
-    \section{Rádiófrekvenciás Mérés}
+    \section{Rádiófrekvenciás mérés}
         A szakmai gaykorlatom során elsősorban a demonstrációs áramkörök rádiófrekvenciás részének fejlesztésével, tesztelésével foglalkoztam. A kérdéses áramköröknél rádiófrekvenciás (RF) szempontból a legtöbb fejfájást az antenna és a végfokerősítő közötti illesztőhálózat okozza. Ez a hálózat azokon az áramkörökön, amikkel én találkoztam, legtöbbször egy 5-elemű szűrő- és illesztőfokozat, ami diszkrét tekercsekből és kondenzátorokból van felépítve az NyHL-en. Egy másik alkatrész, amit elsősorban szub-\SI{}{GHz}-en használnak a cégnél, az integrált balun használata, ami \aref{fig:wstkmighty}. ábrán lehet kivehető az U.FL csatlakozótól jobbra a ,,Mighty Gecko'' feliratú NyHL-en, mint barna, hatlábú alkatrész. Az illesztőhálózatnak sokféle változata van használatban a különböző áramkörökön, mert több szempont határozza meg együttesen az ideális tulajdonságokat.
         \par
         Az első és legnyilvánvalóbb ilyen szempont a működési frekvencia. Értelemszerűen ha más frekvencián működik a rádió, akkor más elemértékekkel lehet hasonló szűrő és impedanciaillesztő hatást elérni. A gyakran előforduló működési frekvenciák: \SI{2,4}{GHz}, \SI{915}{MHz}, \SI{868}{MHz} és \SI{470}{MHz}, de előfordulhatnak még olyanok, amikkel csak én nem találkoztam a munkám során, de tervez ilyen frekvenciákra is eszközöket a cég. Ezek elsősorban \SI{915}{MHz} vagy \SI{470}{MHz} környékén lehetnek, amelyik tartományokban tudtommal a világ különböző részein más-más frekvenciasáv van kijelölve ISM (Industrial Scientific Medical) használatra, amilyen sávokban ezek az eszközök működhetnek. Az elemértékek meghatározásán kívül még egy érdekes hatása van a működési frekvenciának az áramkör tervezésénél. A \SI{2,4}{GHz}-es és szub-\SI{}{GHz}-es áramköröknél jelentős különbség van abban, hogy mennyire érzékeny az illesztőhálózat viselkedése a struktúra geometriájára. Nem meglepő módon nagyobb frekvencián, ahol a működési hullámhossz, de főleg a felharmonikus hullámhosszak közelebb vannak az RF áramköri rész méreteihez, a viselkedést komolyan befolyásolja a geometria. Ezzel szemben nagyobb hullámhosszaknál ez a hatás lecsökken és sokkal szabadabban lehet átrendezgetni az NyHL-en az alkatrészeket mindenféle helytakarékossági és egyéb szempont alapján, persze a topológia megtartásával.
