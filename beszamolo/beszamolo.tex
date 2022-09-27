@@ -33,6 +33,7 @@
 \usepackage[range-phrase=--, range-units=single]{siunitx}
 \usepackage{xcolor}
 \usepackage[a-3u]{pdfx}
+
 \hypersetup{
 	colorlinks,
 	linkcolor={red!50!black},
@@ -41,9 +42,12 @@
 }
 
 \pagestyle{plain} 
-
 \listfiles % a package-ek kilistázása a logba
+%\parskip=10pt
+%\parindent=0pt
 
+\author{Szilágyi Gábor \\\vspace{2cm}\\ Konzulens: Bódi Tamás}
+\date{Budapest, \today}
 \title{
 \centering
 \includegraphics[width=0.6\textwidth]{kep/bme_logo.pdf} \\
@@ -55,33 +59,26 @@
 \huge{\textbf{MSc Szakmai gyakorlat beszámoló}} \\
 \vspace{3cm}}
 
-%\parskip=10pt
-%\parindent=0pt
 
-\author{Szilágyi Gábor \\\vspace{2cm}\\ Konzulens: Bódi Tamás}
-\date{Budapest, \today}
-  
 
 \begin{document}
     \maketitle
     \section{Bevezetés}
     A Silicon Laboratories Hungary kft-nél 2021 júliusában kezdtem el dolgozni gyakornokként és egészen 2022 augusztusáig maradtam a cégnél egy kisebb megszakítással télen. Az elmúlt évben sokat tanultam a munkám során. Az MSc-s szakmai gyakorlat ledokumentált időtartama alatt már komolyabb feladataim voltak, mint a gyakornokoskodásom elején. Ezeket az elvégzett feladatokat, a használt eszközöket és keretrendszert mutatom be ebben a beszámolóban. A cégen belül a ,,Hardware Tools'' csapatban dolgoztam, ez a csapat elsősorban a rádiós demonstrációs áramkörök tervezéséért és az ezekhez kapcsolódó mérésekért felelős.
     \subsection{A cégről}
-        A fent említett cég a Silicon Laboratories (SiLabs) austini központú (USA, Texas), multinacionális vállalat budapesti alvállalata. A cég rendelkezik irodákkal Austinon és Budaesten kívül többek között Hyderabadban (India), Osloban (Norvégia) és Rennes-ben (Franciaország). A világ több sarkában való működés ellenére összesen körülbelül 2000-en dolgoznak a cégnél, a budapesti iroda jelenlegi létszáma 200 körüli, ami a cégen belül az egyik legnépesebb helyszínnek számít. Az egyes helyszínek valamelyest specializálódtak a feladatkörükben, például Austinban történik maguknak a szilícium chipeknek a fejlesztése, Budapesten hardver validációval és szoftverfejlesztéssel foglalkoznak nagy számban, norvégiában pedig a demonstrációs áramkörök gyártása történik.
+        A fent említett cég a Silicon Laboratories (SiLabs \cite{SiLabs}) austini központú (USA, Texas), multinacionális vállalat budapesti alvállalata. A cég rendelkezik irodákkal Austinon és Budaesten kívül többek között Hyderabadban (India), Osloban (Norvégia) és Rennes-ben (Franciaország). A világ több sarkában való működés ellenére összesen körülbelül 2000-en dolgoznak a cégnél, a budapesti iroda jelenlegi létszáma 200 körüli, ami a cégen belül az egyik legnépesebb helyszínnek számít. Az egyes helyszínek valamelyest specializálódtak a feladatkörükben, például Austinban történik maguknak a szilícium chipeknek a fejlesztése, Budapesten hardver validációval és szoftverfejlesztéssel foglalkoznak nagy számban, norvégiában pedig a demonstrációs áramkörök gyártása történik.
         \par
         A SiLabs profilja a rádiós vagy rádió nélküli mikrokontroller integrált áramkörök (IC-k) tervezése, eladása, valamint hardveres és szoftveres támogatás nyújtása ezekhez az ügyfeleknek. Az ügyfelek nem végfelhasználók, hanem más cégek, akik a SiLabs chipjeit és támogatását felhasználva készítenek termékeket. Ilyen ügyfél például az Ikea, az Amazon, a Google és az Apple. Az Ikea példájánál maradva, a projekt, amivel személyesen találkoztam és ehhez az ügyfélhez köthető, az okos villanykörtékbe szánt rádiós modulok. Egy másik egyszerűbb alkalmazása a SiLabs rádióinak a kapunyitó távirányító, amikkel gyakran találkozom a laborban a munkatársaimnál. A komplexebb alkalmazások közé tartoznak az okos otthon kialakításához használható eszközök. Ilyen az Amazon Alexa nevű terméke, amely az okos otthon rendszer egy központi, irányító eleme lehet, de ennek a rendszernek más elemei is használhatnak SiLabs chipeket, mint például az okos szenzorok vagy vezérlőeszközök.
         \par
         A Hardware Tools csapat által tervezett és tesztelt demonstrációs áramkörök referencia implementációként szolgálnak a kérdéses IC-ket használó eszközökhöz. Ezeknek az áramköröknek a rádiófrekvenciás része főleg nagyobb frekvenciákon (pl. 2,4 GHz) nagyon érzékeny a nyomtatott áramköri rajz mintázatára és a beültetett alkatrészek elhelyezkedésére. Egy jól működő implementációtól való kis mértékű eltérés is nagyban ronthatja az áramkör teljesítőképességét több szempontból is. Ilyenkor legtöbbször az fordul elő, hogy az alapharmonikus frekvencián, ahol a hasznos adatátvitel történik, lecsökken a kisugárzott teljesítmény és a vételi érzékenység. Egy másik tünete a rosszul megtervezett NYÁK-nak a felharmonikus frekvenciákon a megnövekedett kisgugárzott teljesítmény. Az első probléma miatt az eszköz nem tudja elég jól vagy egyáltalán ellátni a feladatát, a második probléma miatt pedig más eszközök működését akadályozhatja, mivel nem felel meg az elelktromágneses kompatibilitási (EMC) követelményeknek.
         \par
         A csapat által tervezett demonstrációs kitek egy néhány évvel ezelőtti példánya látható \aref{fig:wstkmighty}. ábrán. A nagy Silicon Labs logóval ellátott alaplap a Wireless Starter Kit Mainboard, amit ,,WSTK'' néven szoktunk emlegetni. A kisebb, ,,Mighty Gecko'' feliratú NyÁK a ,,radio board'', amit a WSTK vezérel.
-%
             \begin{figure}
                 \centering
                 \includegraphics[width=0.8\textwidth]{kep/szerkesztett/wstk-mighty-gecko-nagy.jpg}
                 \caption{WSTK + radio board.}
                 \label{fig:wstkmighty}
             \end{figure}
-%
     \section{Rádiófrekvenciás mérés}
         A szakmai gaykorlatom során elsősorban a demonstrációs áramkörök rádiófrekvenciás részének fejlesztésével, tesztelésével foglalkoztam. A kérdéses áramköröknél rádiófrekvenciás (RF) szempontból a legtöbb fejfájást az antenna és a végfokerősítő közötti illesztőhálózat okozza. Ez a hálózat azokon az áramkörökön, amikkel én találkoztam, legtöbbször egy 5-elemű szűrő- és illesztőfokozat, ami diszkrét tekercsekből és kondenzátorokból van felépítve az NyHL-en. Egy másik alkatrész, amit elsősorban szub-\SI{}{GHz}-en használnak a cégnél, az integrált balun használata, ami \aref{fig:wstkmighty}. ábrán lehet kivehető az U.FL csatlakozótól jobbra a ,,Mighty Gecko'' feliratú NyHL-en, mint barna, hatlábú alkatrész. Az illesztőhálózatnak sokféle változata van használatban a különböző áramkörökön, mert több szempont határozza meg együttesen az ideális tulajdonságokat.
         \par
@@ -93,14 +90,12 @@
         \subsection{Vezetett mérés}
             Az általam rendszeresen végzett RF mérések közül a vezetett mérés az egyszerűbb. Ez gyakorlatilag abban áll, hogy a radio board RF kimenetét, ami egy U.FL vagy SMA csatlakozó, egy spektrumanalizátorra kapcsolom és a kiadott jelet elemzem. Ilyen méréseknél általában egy egyszerű szinuszos jelet generáltatok a radio boarddal és az alapharmonikus, valamint a felharmonikusok teljesítményszintjeit vizsgálom. Ilyen célra legtöbbször az Anritsu MS2692A \cite{Anritsu} típusú spektrumanalizátort használtam, ami \aref{fig:anritsu}. ábrán látható, mert ennek a műszernek elég alacsony a zajszintje. Két ilyen mérési eredmény látható \aref{fig:sol-conducted}. ábrán, ahol megfigyelhető, hogy a más frekvenciára készült két testvér radio board közül (mindkettő rádiós chipje a ,,Sol'' cégen belül használt kódnév alatt) a \SI{470}{MHz}-esnek kisebbek a felharmonikus teljesítményei. Tudtommal alacsonyabb frekvencián szigorúbbak a követelmények a felharmonikus teljesítményekkel szemben, mégis az a tapasztalat, hogy alacsonyabb frekvenciájú board-okon kisebb problémát okoznak a felharmonikusok, nagyobb szokott lenni a tartalék a ténylegesen kimért teljesítményszintek és az EMC szabványban meghatározottak között.
             \par
-%
             \begin{figure}
                 \centering
                 \includegraphics[width=0.6\textwidth]{kep/szerkesztett/anritsu.jpg}
                 \caption{Anritsu MS2692A}
                 \label{fig:anritsu}
             \end{figure}
-%
             Vezetett mérést elsősorban két helyzetben végeztem. Egyrészt skkor, amikor már egy más téren letesztelt radio boardról el kellett dönteni, hogy megfelel-e a szabványnak a vezetett teljesítményszintek alapján. Ugyan rádiókról van szó, így elvileg elég lehetne kizárólag csak a sugárzott teljesítményszinteket vizsgálni, de szükség van a vezetetten kicsatolt kimeneti jel minőségbiztosítására is, hogy megfeleljen a szabványnak. A második helyzet, amikor vezetett méréseket végeztem, az volt, amikor egy radio board diszkrét alkatrészekből kialakított illesztőhálózatát kellett próbálkozás útján tökéletesíteni, majd minden változtatás után dokumentálni az adódó teljesítményspektrumot. A \SI{2.4}{GHz}-nél fellépő jelentős parazitahatások miatt gyakorlatilag lehetetlen lenne jó áramköri modellt alkotni a kérdéses illesztőhálózathoz, a 3D-s elektromágneses szimuláció előkészítése pedig túl hosszadalmas lenne, így maradt a próbálkozásos és méregetős módszer. Szub-\SI{}{GHz}-en nem okoztak ilyen gondot az illesztőhálózatok, ilyen board-okon elegendő volt a régen kikísérletezett, jól bevált illesztőhálózatok használata, főleg, hogy amint fentebb említettem, szub-\SI{}{GHz}-en szabadabban lehet a geometriát változtatni, így sokféle elrendezésnél használható marad a megegyező topológiájú hálózat.
             \begin{figure}
                 \centering
@@ -115,7 +110,6 @@
                 \caption{470 és \SI{868}{MHz}-es Sol radio board-ok kimeneti spektruma.}
                 \label{fig:sol-conducted}
             \end{figure}
-%
         \subsection{Sugárzott mérés}
             A vezetett mérés mellett a másik módszer, ahogy egy radio board teljesítőképességét vizsgáltuk a sugárzott mérés, amihez a budapesti irodában lévő antennaszobát használtuk. Maga az antennaszoba egy RF szempontból külső zajoktól elszigetelt és belül a felületeket borító tüskékkel reflexiócsökkentett helyiség. Bent található egy mérőantenna, kicsit pontosabban egy bordás tölcsérantenna, aminek ismert a nyereség-frekvencia karakterisztikája körülbelül \SI{0,3}{GHz}-től \SI{15}{GHz}-ig. Az antennától \SI{3}{m}-re található egy hungarocelltorony léptetőmotorral az alján, ami forgóasztalként funkcionál. Erre az asztalra tesszük méréshez a vizsgálandó rádióadót, vagyis a DUT-ot (Device Under Test) és az antennára csatlakoztatott spektrumanalizátor segítségével mérjük a különböző irányokban és frekvenciákon kisugárzott teljesítményt. Az antennaszoba két vége \aref{fig:antennaszoba}. ábrán látható.
             \begin{figure}
@@ -132,10 +126,9 @@
                 \label{fig:antennaszoba}
             \end{figure}
             \par
-            Az antennaszobának van egy előszobája, ami már a leárnyékolt helyiségen kívül van, itt található a sugárzott mérésekhez dedikált Rohde \& Schwarz FSQ típusú spektrumanalizátor \cite{RS}, a szobában található léptetőmotorok vezérlője és az egész mérést irányító számítógép, ami az előszoba többi eszközére van csatlakoztatva. Az antennaszobában háromféle mérést lehet végezni, ezek közül én kettővel foglalkoztam, de a harmadik mérés tárgyához, egy speciális radio boardhoz is volt valamennyi közöm.
+            Az antennaszobának van egy előszobája, ami már a leárnyékolt helyiségen kívül van, itt található a sugárzott mérésekhez dedikált Rohde \& Schwarz FSQ típusú spektrumanalizátor \cite{FSQ}, a szobában található léptetőmotorok vezérlője és az egész mérést irányító számítógép, ami az előszoba többi eszközére van csatlakoztatva. Az antennaszobában háromféle mérést lehet végezni, ezek közül én kettővel foglalkoztam, de a harmadik mérés tárgyához, egy speciális radio boardhoz is volt valamennyi közöm.
             \par
             Az első méréstípus a harmonikus teljesítményszint mérés, röviden ,,performance'' mérésként szoktuk emlegetni. Ebben az esetben a tesztelni kívánt adót a forgóasztalra helyezzük és az egy helyben álló mérőantenna segítségével mérjük az antennához érkező teljesítmény maximumát, amíg körbefordul az asztal a DUT-tal. Ezáltal a DUT 3-dimenziós iránykarakterisztikájának egy bizonyos síkmetszetén belül tudjuk meghatározni a maximális kisugárzott teljesítménysűrűséget. A DUT-ot a forgóasztalra \aref{fig:orientaciok}. ábra szerinti orientációkban helyezhetjük el.
-%
             \begin{figure}
                 \centering
                 \begin{subfigure}{0.3\textwidth}
@@ -153,7 +146,6 @@
                 \caption{Az iránykarakterisztika három metszetének mérése az antennaszobában.}
                 \label{fig:orientaciok}
             \end{figure}
-%
             A performance méréshez hozzátartozik még az, hogy milyen frekvencián mérünk, pontosabban az alapharmonikus hányadik felharmonikusán (vagy magán az alapharmonikuson). Ez gyakorlatilag csak a spektrumanalizátor vezérlésének és a mért nyers teljesítményszintek korrekciójának kérdése. Még egy fontos mérési paraméter a mérőantenna polarizációja, ami szerint vízszintes és függőleges orientációjú méréseket szoktunk végezni. Összességében a performance mérésnél tehát a paraméterek: az alapharmonikus frekvencia, a felharmonikus sorszáma, a DUT orientációja és a mérőantenna polarizációja. A performance méréseknél általában az a lényeges adat, hogy minden mért orientációban, polarizációval és felharmonikuson megfelel-e az EMC követelményeknek a DUT. Ha a mérés alapján megfelel, akkor elég jó biztossággal lehet állítani, hogy a le nem tapogatott irányokban nincs kiugró nyaláb a felharmonikusok sugárzásában, tehát tényleg megfelel a követelményeknek. Ha esetleg nem ment át a teszten, akkor a mérés paramétereiből lehet valamelyest arra következtetni, hogy honnan jöhet a nemkívánt felharmonikus sugárzás, esetleg mivel lehetne ezt orvosolni.
             \par
             Egy másik antennaszobai mérés az iránykarakterisztika mérése. A mérés előkészítése fizikailag ugyanabból áll, mint a performance mérés esetében. Annyi a különbség, hogy itt csak az alapharmonikuson szoktunk mérni (a felharmonikusok sugárzásának karakterisztikája érdektelen, ha a megadott küszöbszint alatt vannak), valamint amért teljesítményszintek feldolgozásában. A spektrumanalizátor zero span módban az alpharmonikus frekvencián mér, amíg a forgóasztal egyszer körbefordul a DUT-tal, addig ezzel szinkronban a spektrumanalizátor egyet sweepel, így a körbefordulás végére a kijelzőjén megjelenik az adott síkhoz tartozó iránydiagram derékszögű koordinátarendszerben ábrázolva.
@@ -163,72 +155,69 @@
             Ez alapvetően egy előnyös dolog, de azért hogy teljesen kihasználhassuk a jelenségben rejlő lehetőségeket, kicsit mérni és számolni kell. A fentiek miatt a CW (modulálatlan) jellel végzett mérés a lehető legszigorúbb a moduláció szempontjából. Tehát ha egy rádió CW esetben átmegy a teszten, akkor biztosak lehetünk benne, hogy modulált esetben is átmenne, mert az eredmény nem lehetne rosszabb, legfeljebb hasonló, kislöketű modulációk esetén. Akkor lesz érdemes a modulációs faktoral számolni, ha a rádió megbukik a teszten, de nem sokkal, például csak 2--3 {}{dB}-vel. Ekkor egyszerűen a modulációs faktort ki kell vonni a mért teljesítményszintből és az így kapott, kompenzált értéket kell összehasonlítani a szabványban megadott határértékkel. Mint fent említettem, az aktuális modulációs faktor függ a felharmonikus sorszámától és a modulációs eljárástól. A Silabs-féle rádiós IC-k többféle modulációt támogatnak, az egyes modulációs eljárásokon belül (BPSK, QAM, stb.) is többféle változat használható, más-más bitsebességgel és frekvencialökettel, ezáltal sávszélességgel.
             \par
             Az egyes lényeges modulációkra érdemes megmérni a modulációs faktort lehetőleg olyan műszerbeállításokkal, amilyenekkel a hivatalos EMC teszteket is végeznék. Ez volt az én egyik feladatom. A méréseket \aref{fig:fsv}. ábrán látható spektrumanalizátorral végeztem. Ennek a műszernek ugyan nincs kvázicsúcs-detektora, amilyen csak nagyon drága műszerekben szokott előfordulni és a hivatalos teszteken is használatos, de ilyen téren is lehet a szigorúbb döntés felé hibázni. Ez a szigorúbb mérést eredményező detektor a csúcsdetektor, emiatt ilyet használtam a méréseken.
- %
             \begin{figure}
                 \centering
                 \includegraphics[width=0.6\textwidth]{kep/szerkesztett/fsv.jpg}
-                \caption{Rohde \& Schwarz FSVA3044 Spektrumanalizátor.}
+                \caption{Rohde \& Schwarz FSVA3044 Spektrumanalizátor. \cite{FSV}}
                 \label{fig:fsv}
             \end{figure}
-%
         \subsection{Antennaimpedancia}
-            A board-okon gyakran használunk nyomtatott antennákat. Ezeknek le kell ellenőrizni a bemeneti impedanciáját egy új antennastruktúra tesztelése során, hogy kis reflexióval illeszkedjenek az őket tápláló tápvonalhoz. Ilyen mérésben is volt részem a gyakornokságom alatt. A bemeneti impedanciát VNA (vektor-hálózatanalizátor) segítségével mértem meg, ami \aref{fig:vna}. ábrán látható. Ez a műszer általános kétkapu mérésére is alkalmas, így két porttal rendelkezik, de egy antenna méréséhez elég csak az egyik portja. A működése egyportos módban leegyszerűsítve a következő. Egy beállított frekvenciatartomány pontjaihoz tartozó próbajelekkel gerjeszti a rákapcsolt egykaput (esetünkben az antennát) és megméri a visszavert jelek teljesítményét és fázisát. Ezekből aztán kiszámítható a vizsgált egykapu bemeneti impedanciája, de az esetemben már a visszavert jel teljesítménycsökkenése is fontos információval bír, mert ez az antenna illesztettlenségének egy mértéke.
-%
-%            \begin{figure}
-%                \centering
-%                \includegraphics[width=0.6\textwidth]{kep/szerkesztett/sip-modul.jpg}
-%                \caption{SiP modul nyomtatott antennával.}
-%                \label{fig:sip-modul}
-%            \end{figure}
-%
-%
-            \begin{figure}
+            A board-okon gyakran használunk nyomtatott antennákat. Ezeknek le kell ellenőrizni a bemeneti impedanciáját egy új antennastruktúra tesztelése során, hogy kis reflexióval illeszkedjenek az őket tápláló tápvonalhoz. Ilyen mérésben is volt részem a gyakornokságom alatt. A bemeneti impedanciát VNA (vektor-hálózatanalizátor) segítségével mértem meg, ami \aref{fig:vna}. ábrán látható. Ez a műszer általános kétkapu mérésére is alkalmas, így két porttal rendelkezik, de egy antenna méréséhez elég csak az egyik portja. A működése egyportos módban leegyszerűsítve a következő. Egy beállított frekvenciatartomány pontjaihoz tartozó próbajelekkel gerjeszti a rákapcsolt egykaput (esetünkben az antennát) és megméri a visszavert jelek teljesítményét és fázisát. Ezekből aztán kiszámítható a vizsgált egykapu bemeneti impedanciája, de az esetemben már a visszavert jel teljesítménycsökkenése is fontos információval bír, mert ez az antenna illesztettlenségének egy mértéke. Azért kapom meg mindenféle utánaszámolás nélkül az antenna bemeneti reflexióját a VNA-s mérés eredményeképpen, mert a board-on megvalósított nyomtatott antenna is \qty{50}{\ohm}-ra van illesztve, az azt tápláló nyomtatott tápvonal is \qty{50}{\ohm}-os karakterisztikus impedanciájú és a VNA is \qty{50}{\ohm}-os rendszerben dolgozik.
+           \begin{figure}
                 \centering
                 \includegraphics[width=0.6\textwidth]{kep/szerkesztett/vna.jpg}
-                \caption{Impedanciaméréshez használt vektor-hálózatanalizátor.}
+                \caption{Impedanciaméréshez használt vektor-hálózatanalizátor \cite{Keysight}.}
                 \label{fig:vna}
             \end{figure}
-%
             \par
-            pigtailhez magyarázat...
+            Az impedanciamérés alanya egy chip antennával rendelkező board volt, ez \aref{fig:pigtail}. ábrán látható, a mérés két külön fázisában. A board-on egy chip antenna található, ez NyÁK jobb szélén középen lévő, fehér téglatest, a tetején egy kis barna folttal. Valójában nem ez az alkatrész sugároz elektromágneses hullámokat, magában túl kicsi is lenne a körülbelül \qty{3}{mm}-es méretével. Ehelyett ez az alkatrész gyakorlatilag egy kifejezetten kis értékű (ha jól emlékszem, néhányszor \qty{100}{fF}), és kis szórású kondenzátor. Ez az alkatrész egy a NyHL-en mellette elhelyezkedő, a rézrétegekben megfelelő méretezéssel kialakított lyukkal együtt alkot párhuzamos LC rezgőkört. Ez a rezgőkör végeredményben az NyHL (a képeken jobb oldali) rövidebb élét hangolja ki, mint dipól antennát, a rezezés éle mentén folyó áramok sugároznak. A megoldás integráltságából sejthető, hogy elsősorban helytakarékosságra van optimalizálva, nem pedig impedancia-sávszélességre vagy nyereségre.
+            \par
+            Az impedanciamérés során kétszer mértem meg az antennát, mert az első méréshez rosszul preparáltam az antennát a ráforrasztott koaxiális tápvonalcsonkkal (pigtail-lel). Az első kísérletnél (\ref{fig:pigtail1}. ábra) túl közel helyezkedett el a pigtail a fent említett NyHL-ben található induktív lyukhoz, így elhangolta a rezgőkört, ezzel pedig az egész antennát. A második kísérletnél ezt a hibát korrigáltam és (jó közelítéssel) torzítatlan mérést tudtam végezni (\ref{fig:pigtail2}. ábra).
             \begin{figure}
                 \centering
-                \includegraphics[width=0.48\textwidth]{kep/szerkesztett/pigtail1.jpg}
-                \includegraphics[width=0.48\textwidth]{kep/szerkesztett/pigtail2.jpg}
+                \begin{subfigure}{0.35\textwidth}
+                    \includegraphics[width=\textwidth]{kep/szerkesztett/pigtail1.jpg}
+                    \caption{Torzított mérés.}
+                    \label{fig:pigtail1}
+                \end{subfigure}
+                \begin{subfigure}{0.35\textwidth}
+                    \includegraphics[width=\textwidth]{kep/szerkesztett/pigtail2.jpg}
+                    \caption{Elfogadható mérés.}
+                    \label{fig:pigtail2}
+                \end{subfigure}
                 \caption{Nyomtatott antenna impedanciaméréséhez módosított board.}
                 \label{fig:pigtail}
             \end{figure}
     \section{NyHL tervezés}
-        A cég által forgalmazott rádiós IC-ket használó referencia-áramkörök, leginkább az ezeket hordozó nyomtatott huzalozási lemezek tervezése a Hardware Tools csapat feladata, így ebben is részt vettem. Az egyik folyó projekt egy olyan készülékpáros tervezése volt a cégnél, ami rádiós komunikáció alapján képes nagy pontossággal távolságo mérni két kisméretű résztvevő eszköz között. A projektet ,,HADM'' (vagyis ,,High Accuracy Distance Metering'') néven emlegettük. A két résztvevő készülék nem egyforma, az egyik egy egyszerű adóvevő, ez a ,,tag'', ami körülbelül akkora, mint egy kézi rádiós kaputávirányító, a másik pedig egy komolyabb, többantennás mérőműszer. Az utóbbi végeredményben jelzést küld a tag-nek, ami válaszol, majd a válaszjel érkezési ideje és egyéb paraméterei alapján lehet kiszámítani a távolságot a két készülék között.
- %
+        A cég által forgalmazott rádiós IC-ket használó referencia-áramkörök, leginkább az ezeket hordozó nyomtatott huzalozási lemezek tervezése a Hardware Tools csapat feladata, így ebben is részt vettem. A cégnél egy Jenkins-re \cite{Jenkins} épülő keretrendszerben folyik a NyÁK fejlesztés és gyártás. A gyártási fájlok, alkatrészlisták, szép kapcsolási rajzok és dokumentáció generálása történik egy ,,fordítás'' során. Ugyanez a rendszer teremti meg a kapcsolatot a különböző fejlesztői környezetekben végzett tervezési lépések között. Ez a rendszer meglehetősen bonyolult, sok történelmileg kialakult megoldást tartalmaz és különböző irodában dolgozó csapatok más-más megközelítésű eszközeit ötvözi. Ezek miatt beletelt egy kis időbe, mire el tudtam igazodni a használatában.
+        \par
+        Az egyik folyó projekt egy olyan készülékpáros tervezése volt a cégnél, ami rádiós komunikáció alapján képes nagy pontossággal távolságo mérni két kisméretű résztvevő eszköz között. A projektet ,,HADM'' (vagyis ,,High Accuracy Distance Metering'') néven emlegettük. A két résztvevő készülék nem egyforma, az egyik egy egyszerű adóvevő, ez a ,,tag'', ami körülbelül akkora, mint egy kézi rádiós kaputávirányító, a másik pedig egy komolyabb, többantennás mérőműszer. Az utóbbi végeredményben jelzést küld a tag-nek, ami válaszol, majd a válaszjel érkezési ideje és egyéb paraméterei alapján lehet kiszámítani a távolságot a két készülék között.
             \begin{figure}
                 \centering
                 \includegraphics[width=0.6\textwidth]{kep/szerkesztett/antennamatrix.png}
                 \caption{Beltéri iránymérő antennamátrix Altiumban.}
                 \label{fig:antennamatrix}
             \end{figure}
-%
         \subsection{Kapcsolási rajz}
             Logikusan először egy áramkör kapcsolási rajzát tervezi meg az ember, ebben a fázisban kevéssé vettem részt. A SiLabs IC-k az évek során inkrementálisan fejlődtek, így a jól bevált kapcsolási rajzokon csak kisebb módosításokat kellett végrehajtani egy-egy új board esetében, gyakran fordult elő az is, hogy különböző régebbi kapcs. rajzokból gyakorlatilag teljes egészében össze lehetett válogatni az egyes áramköri részeket, így nulláról ritkán kellett megtervezni bármilyen részegységet. Ez alól egy stabil kivételt képeznek a fentebb emlegetett illesztőhálózatok, amelyeket gyakorlatilag minden új végfokerősítő és layout kombinációhoz újra ki kellett kísérletezni. Mivel itt tényleg kísérletezésről van szó, a kapcsolási rajzon nem sokkal a végső, nagy tételben történő gyártás előttig csak ,,TBD'' (To Be Determined) értékkel szerepeltek. A kapcsolási rajz (séma, schematic) tervezéséhez az OrCAD \cite{OrCAD} programcsomag használatos a cégnél.
         \subsection{Nyomtatott huzalozási rajz}
-        A HADM projektbe annyival segítettem be, hogy a tag layoutjának megtervezésében vettem részt. Ehhez az Altium Designer \cite{Altium} szoftvercsomagot használtam, amit a cégnél, de elsősorban a Hardware Tools csapatban előszeretettel használnak. Az Altium Designer az NyHL tervezés minden lépését magába foglalja erősen integrált módon, a kapcsolási rajz tervezésétől a layout megszerkesztésén át a gyártási fájlok generálásáig. Ilyen szempontból hasonlít a KiCAD-hez, ami gyakorlatilag egy ingyenes és nyílt forráskódú megfelelője az Altium Designer-nek, persze sok funkció hiányzik belőle, amit az Altium Designer nyújt, lévén az utóbbi egy meglehetősen borsos árú, professzionális programcsomag. Azzal, hogy előzőleg már saját szórakozásomra terveztem NyHL-t KiCAD-ben és a cégnél egy professzionálisabb program használatával is kipróbálhattam magam hasznos tapasztalatot szereztem a sok cégnél használatos professzionális fejlesztői környezetek használatában.
-        \par
-        Annak ellenére, hogy az Altium Designer teljesen lefedi a NyHL tervezés lépéseit, nem minden részfeladathoz ezt használja a csapat. A kapcsolási rajz megtervezéséhez az OrCAD nevű programot használtuk, ez valamivel régebbi, mint az Altium, de a megtervezett séma Altiumban használható formátumba való exportálása könnyen megoldható. Ez a változatosság a cégnél használatos tervezői programokban történelmi okokból alakult így, műszaki területen soksor lehet hasonló bonyodalmakkal találkozni, amiket egyik eszközről a másikra való részleges átállás okoz.
-        \par
-        \Aref{fig:antennamatrix}. ábrán látható egy olyan antennamátrix layout-ja, aminek a mérésében én is részt vettem. Ennél a konkrét méréssorozatnál az volt a feladatom, hogy kiderítsem, mi okozhatta, hogy a gyártási folyamat részét képező automatizált ellenőrző mérés szerint néhány board hibás volt. Ez az antennamátrix beltéri iránymérésre használható, egy a fent említett HADM taghez hasonló kisebb board irányát tudja meghatározni meglepő pontossággal.
-        \par
-%
+            A HADM projektbe annyival segítettem be, hogy a tag layoutjának megtervezésében vettem részt. Ehhez az Altium Designer \cite{Altium} szoftvercsomagot használtam, amit a cégnél, de elsősorban a Hardware Tools csapatban előszeretettel használnak. Az Altium Designer az NyHL tervezés minden lépését magába foglalja erősen integrált módon, a kapcsolási rajz tervezésétől a layout megszerkesztésén át a gyártási fájlok generálásáig. Ilyen szempontból hasonlít a KiCad-hez \cite{KiCad}, ami gyakorlatilag egy ingyenes és nyílt forráskódú megfelelője az Altium Designer-nek, persze sok funkció hiányzik belőle, amit az Altium Designer nyújt, lévén az utóbbi egy meglehetősen borsos árú, professzionális programcsomag. Azzal, hogy előzőleg már saját szórakozásomra terveztem NyHL-t KiCad-ben és a cégnél egy professzionálisabb program használatával is kipróbálhattam magam hasznos tapasztalatot szereztem a sok cégnél használatos professzionális fejlesztői környezetek használatában.
+            \par
+            Annak ellenére, hogy az Altium Designer teljesen lefedi a NyHL tervezés lépéseit, nem minden részfeladathoz ezt használja a csapat. A kapcsolási rajz megtervezéséhez az OrCAD nevű programot használtuk, ez valamivel régebbi, mint az Altium, de a megtervezett séma Altiumban használható formátumba való exportálása könnyen megoldható. Ez a változatosság a cégnél használatos tervezői programokban történelmi okokból alakult így, műszaki területen soksor lehet hasonló bonyodalmakkal találkozni, amiket egyik eszközről a másikra való részleges átállás okoz.
+            \par
+            \Aref{fig:antennamatrix}. ábrán látható egy olyan antennamátrix layout-ja, aminek a mérésében én is részt vettem. Ennél a konkrét méréssorozatnál az volt a feladatom, hogy kiderítsem, mi okozhatta, hogy a gyártási folyamat részét képező automatizált ellenőrző mérés szerint néhány board hibás volt. Ez az antennamátrix beltéri iránymérésre használható, egy a fent említett HADM taghez hasonló kisebb board irányát tudja meghatározni meglepő pontossággal.
+            \par
             \begin{figure}
                 \centering
                 \includegraphics[width=0.6\textwidth]{kep/szerkesztett/power-levels.jpg}
                 \caption{Különböző kialakítású és teljesítményszintű radio boardok.}
                 \label{fig:power-levels}
             \end{figure}
-%
-        Ennek a méréssorozatnak az eredménye egészen érdekes volt. Az említett automatizált méréseket, amelyek a hibát jelezték, úgy végzik, hogy a megmérendő boardot egy speciális foglalatba helyezik, ami bizonyos előre meghatározott pozíciókban fém tüskéket nyom a vizsgálandó boardhoz, ezeken az érintkezőkön keresztül végzik az elektronika tesztelését (ami természetesen szintén automatizált). Ahogy \aref{fig:wstkmighty}. ábrán látható, maga a radio board általában nem túl nagy, körülbelül $3,5 \times \SI{5}{cm}$-es, de különböző méretű változatok láthatóak \aref{fig:power-levels}. ábrán. Gyártástechnológiai szempontból nem lenne gazdaságos legyártott NyHL-enként csak egy-egy boardot megvalósítani, emiatt azok rendszerint panelizálva készülnek $2 \times 4$-es mátrixban. Egy ilyen panel egyszerre kerül letesztelésre a mérőtüskés szerkezetben, amiben boardonként körülbelül 10 tüske van. A teljes panel mérete körülbelül $15 \times \SI{25}{cm}$-es. Az antennamátrix jóval nagyobb, mint az átlagos radio boardok, emiatt egy ilyen board elfoglal egy egész panelt, így ennek a letesztelésénél a tüskék nagy része fölöslegesen nyomódik a board-hoz a szokásos helyeken, ahol ebben az esetben nem a céltudatosan kialakított tesztpontok vannak, hanem a patch antennák, nyomtatott tápvonalak és egyéb mintázatok a felső rézrétegen.
-        \par
-        Úgy alakult a tesztelés, hogy körülbelül 1000 db közül 4 db antennamátrix letesztelésénél a fölöslegesen lenyomódó mérőtüskék átszúrták a forrasztásgátló lakkréteget és érintkezésbe léptek az alatta lévő rézréteggel, amivel meghamisították a mérési eredményeket.
-%TODO: összefoglalás, értékelés
+            Ennek a méréssorozatnak az eredménye egészen érdekes volt. Az említett automatizált méréseket, amelyek a hibát jelezték, úgy végzik, hogy a megmérendő boardot egy speciális foglalatba helyezik, ami bizonyos előre meghatározott pozíciókban fém tüskéket nyom a vizsgálandó boardhoz, ezeken az érintkezőkön keresztül végzik az elektronika tesztelését (ami természetesen szintén automatizált). Ahogy \aref{fig:wstkmighty}. ábrán látható, maga a radio board általában nem túl nagy, körülbelül $3,5 \times \SI{5}{cm}$-es, de különböző méretű változatok láthatóak \aref{fig:power-levels}. ábrán. Gyártástechnológiai szempontból nem lenne gazdaságos legyártott NyHL-enként csak egy-egy boardot megvalósítani, emiatt azok rendszerint panelizálva készülnek $2 \times 4$-es mátrixban. Egy ilyen panel egyszerre kerül letesztelésre a mérőtüskés szerkezetben, amiben boardonként körülbelül 10 tüske van. A teljes panel mérete körülbelül $15 \times \SI{25}{cm}$-es. Az antennamátrix jóval nagyobb, mint az átlagos radio boardok, emiatt egy ilyen board elfoglal egy egész panelt, így ennek a letesztelésénél a tüskék nagy része fölöslegesen nyomódik a board-hoz a szokásos helyeken, ahol ebben az esetben nem a céltudatosan kialakított tesztpontok vannak, hanem a patch antennák, nyomtatott tápvonalak és egyéb mintázatok a felső rézrétegen.
+            \par
+            Úgy alakult a tesztelés, hogy körülbelül 1000 db közül 4 db antennamátrix letesztelésénél a fölöslegesen lenyomódó mérőtüskék átszúrták a forrasztásgátló lakkréteget és érintkezésbe léptek az alatta lévő rézréteggel, amivel meghamisították a mérési eredményeket.
+    \section{Összefoglalás}
+        A nyári szakmai gyakorlatként ledokumentált időszak a SiLabs-nál kifejezetten hasznos volt. Előzőleg már majdnem egy évig dolgoztam a cégnél, így volt időm beleszokni a céges környezetbe, a feladataimat rutinosan tudtam elvégezni és a munkatársaimat hatákonyan tudtam segíteni. Sok komoly, RF méréseknél használatos műszerrel megismerkedtem, amikkel az egyetemen csak futólag vagy csak elméletben találkoztam. Úgy gondolom, a szerzett tapasztalataim jelentős előnyt jelentenek majd a hasonló profilú cégeknél való elhelyezkedésnél. Nagyon sokat köszönhetek a konzulensemnek és főnökömnek, Bódi Tamásnak, aki mindig tudott testhezálló feladatot adni nekem és végtelen türelmével megkönnyítette a becsatlakozásomat a csapatba és az iparba.
 \bibliography{mybib}
-\bibliographystyle{plain}
+\bibliographystyle{unsrt}
 \end{document}
